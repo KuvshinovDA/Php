@@ -9,6 +9,17 @@ $continents = [
     "Antarctica" => ['Hydrurga leptonyx','Lobodon carcinophaga'],
 ];
 
+$newContinents = [];
+foreach ($continents as $newPlace =>$animArray) {
+    foreach ($animArray as $newArray) {
+        if (strpos($newArray, ' ') !== false) {
+            array_push ($newContinents, $newArray);
+        }
+    }
+}
+echo '<pre>';
+print_r ($newContinents);
+
 $animalName = [];
 $animalSurname = [];
 foreach ($continents as $place =>$names) {
