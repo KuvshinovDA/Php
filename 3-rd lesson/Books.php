@@ -1,7 +1,6 @@
 <?php
 if (count($argv) == 1) {
-  echo "Нет параметров поиска.";
-  exit;
+  exit('Нет параметров поиска.');
 }
 $query = urlencode($argv[1]);
 $data = json_decode(file_get_contents("https://www.googleapis.com/books/v1/volumes?q=${query}"), true);
@@ -11,7 +10,7 @@ if (json_last_error()) {
   exit;
 }
 
-$file = fopen("./books.csv", "w+");
+$file = fopen('./books.csv', 'w+');
 
 foreach ($data["items"] as $v) {
   $id = $v["id"];
