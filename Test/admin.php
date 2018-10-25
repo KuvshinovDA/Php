@@ -1,8 +1,8 @@
 <?php
 if (!empty($_FILES)) {
-  $uploadDir = '\tests';
+  $uploadDir = 'tests';
   $name = $_FILES['testfile']['name'];
-  move_uploaded_file ($_FILES['testfile']['tmp_name'], __DIR__  . "$uploadDir \\ $name"); 
+  move_uploaded_file ($_FILES['testfile']['tmp_name'], __DIR__  .DIRECTORY_SEPARATOR .$uploadDir .DIRECTORY_SEPARATOR .$name); 
   echo 'Файл успешно загружен' . '<br/>';
   echo "<a href='list.php'>Перейти на страницу тестов</a>";
 }

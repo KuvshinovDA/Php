@@ -1,9 +1,12 @@
 <?php
-  if (isset($_GET['name'])) {
-    $uploadDir = '\tests';
-    $name = $_GET['name'];
-    $data = json_decode(file_get_contents(__DIR__ . "$uploadDir\\$name"), true);
-  }
+if (!isset($_GET['name'])) {
+  exit ("<a href='list.php'>Выберите корректный тест</a>");
+}
+if (isset($_GET['name'])) {
+  $uploadDir = 'tests';
+  $fileName = $_GET['name'];
+  $data = json_decode(file_get_contents(__DIR__ .DIRECTORY_SEPARATOR .$uploadDir .DIRECTORY_SEPARATOR .$fileName), true);
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -20,8 +23,11 @@
   $correctAnswerNum = $q['answer'];
   $name = $q['testNumber'];
   $userAnswerNum = $_POST[$name];
+  if (empty($_POST) || $correctAnswerNum !== $userAnswerNum) {
+    $a = FALSE;
+  } 
 ?>
-  <p><b><?php echo $quest?></b> <br>
+  <p><b><?php echo $quest?></b><br>
     <?php foreach ($answers as $answerNum => $answer) : ?>
       <label>
         <input type="radio" name="<?php echo $name ?>" value="<?php echo $answer ?>">
@@ -34,11 +40,12 @@
 </form>
 <?php
 if (!empty($_POST)) :
-  if($correctAnswerNum == $userAnswerNum): ?>
-    <p><b>Ответ правильный, тест пройден</b></p>
-  <?php else : ?>
-    <p><b>Ответ неправильный, тест не пройден</b></p>
+  if ($a !== FALSE) : ?>
+  <p><b>Ответ правильный, тест пройден</b></p>
+<?php else : ?>
+  <p><b>Ответ неправильный, тест не пройден</b></p>
   <?php endif; ?>
 <?php endif; ?>
+<p><br/><a href='list.php'>Перейти к выбору тестов</a></p>
 </body>
 </html>
