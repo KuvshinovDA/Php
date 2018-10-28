@@ -1,5 +1,11 @@
 <?php
 $fileName = $_GET['name'];
+if (empty($_GET['userName'])) {
+  echo 'Необходимо ввести ваше имя!';
+  echo "<p><br/><a href='list.php'>Перейти к выбору теста.</a></p>";
+  exit;
+}
+
 $uploadDir = 'tests';
 $userName = $_GET['userName'];
 $data = json_decode(file_get_contents(__DIR__ .DIRECTORY_SEPARATOR .$uploadDir .DIRECTORY_SEPARATOR .$fileName), true);
