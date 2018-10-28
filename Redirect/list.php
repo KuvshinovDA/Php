@@ -9,7 +9,6 @@ $files_list = scandir($files_dir);
   <meta charset="UTF-8">
   <title>Выбор теста</title>
 </head>
-
 <body>
 <h1>Выберите тест для прохождения</h1>
 <?php foreach ($files_list as $value) :
