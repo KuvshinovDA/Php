@@ -1,8 +1,39 @@
 <?php 
 session_start();
 $pdo = new PDO("mysql:host=localhost;dbname=global", "kuvshinov", "root");
+
+if (isset($_POST['main_submit'])) {
+  if (!empty($_POST['login']) && !empty($_POST['password'])) {
+    $new_login = $_POST['login'];
+    $new_password = $_POST['password'];
+ 
+    $old = "SELECT id FROM user WHERE login = '$new_login' AND password = '$new_password' ";
+    $old_user = $pdo->query($old);
+    $data = $old_user->fetch();
+ 
+    $same = "SELECT id FROM user WHERE login = '$new_login' AND password != '$new_password' ";
+    $same_user = $pdo->query($same);
+    $data_same_user = $same_user->fetch();
+ 
+     if ($data_same_user) {
+       exit ('Пользователь с таким именем уже существует');
+     }
+ 
+ if ($data) {
+   $_SESSION['user_id'] = $data['id'];
+ } else {
+   $new = "INSERT INTO user (login, password) VALUES ('$new_login', '$new_password')";
+     $new_user = $pdo->query($new);
+     $data_new_user = $new_user->fetch();
+     $_SESSION['user_id'] = $data_new_user['id'];
+   }  
+ } else {
+     exit ('Для входа введите имя и пароль!');
+   }
+ }
+
 $user_id = $_SESSION['user_id'];
-var_dump ($user_id);
+//var_dump ($user_id);
 $date = date('Y-m-d');
 $my_case = "SELECT * FROM task WHERE user_id = '$user_id' ORDER BY date_added ";
 $users = "SELECT * FROM user";
@@ -30,6 +61,11 @@ if (isset($_POST['set_user_id'])) {
   $set_user = "UPDATE task SET assigned_user_id='$set_user_id' WHERE id='$case_id' AND user_id='$user_id'";
   $change_set_user = $pdo->query($set_user);
 }
+if (isset($_POST['exit'])) {
+  session_unset();
+  session_destroy();
+  header('location:registration.php');
+}
 ?>
 
 <!doctype html>
@@ -56,6 +92,7 @@ if (isset($_POST['set_user_id'])) {
   <input type = "submit" name = "my_list" value = "Мои дела">
   <input type = "submit" name = "my_cases" value = "Делегированные дела">
   <input type = "submit" name = "all_my_cases" value = "Все мои дела">
+  <input type="submit" name="exit" value="Выход"> 
   </p></br>
 </form>  
 
