@@ -2,7 +2,6 @@
 session_start();
 $pdo = new PDO("mysql:host=localhost;dbname=global", "kuvshinov", "root");
 
-
 if (isset($_POST['submit'])) {
  if (!empty($_POST['login']) && !empty($_POST['password'])) {
    $new_login = $_POST['login'];
@@ -22,18 +21,11 @@ if (isset($_POST['submit'])) {
 
 if ($data) {
   $_SESSION['user_id'] = $data['id'];
-  //$_SESSION['user_name'] = $data['login'];
-  echo $_SESSION['user_id']. '</br>';
-  //var_dump ($data['login']). '</br>';
-  echo 'Пользователь существует';
 } else {
   $new = "INSERT INTO user (login, password) VALUES ('$new_login', '$new_password')";
     $new_user = $pdo->query($new);
     $data_new_user = $new_user->fetch();
     $_SESSION['user_id'] = $data_new_user['id'];
-    //$_SESSION['user_name'] = $data_new_user['login'];
-    echo $_SESSION['user_id']. '</br>';
-    echo 'Пользователь добавлен в базу';
   }  
 } else {
     echo 'Для входа введите имя и пароль!';
@@ -48,9 +40,6 @@ if ($data) {
 </head>
 <body>
   <p><h2>Для входа введите Ваше имя и пароль</h2></p>
-  <ul>    
-</ul>
-
   <form method="POST">
     <label>
       <p><input type="text" placeholder="Имя" name="login"></p>
@@ -60,6 +49,5 @@ if ($data) {
     </label>
   <input type="submit" name ="submit" value="Войти">
   </form>
-
 </body>
 </html>

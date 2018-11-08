@@ -2,6 +2,7 @@
 session_start();
 $pdo = new PDO("mysql:host=localhost;dbname=global", "kuvshinov", "root");
 $user_id = $_SESSION['user_id'];
+var_dump ($user_id);
 $date = date('Y-m-d');
 $my_case = "SELECT * FROM task WHERE user_id = '$user_id' ORDER BY date_added ";
 $users = "SELECT * FROM user";
@@ -29,14 +30,6 @@ if (isset($_POST['set_user_id'])) {
   $set_user = "UPDATE task SET assigned_user_id='$set_user_id' WHERE id='$case_id' AND user_id='$user_id'";
   $change_set_user = $pdo->query($set_user);
 }
-if (isset($_POST['my_cases'])) {
-  $my_cases = "SELECT * FROM task t INNER JOIN user u ON u.id=t.assigned_user_id WHERE
-  t.user_id = '$user_id' OR t.assigned_user_id = '$user_id'";
-  $all_my_cases = $pdo->query($my_cases);
-  foreach ($all_my_cases as $all_cases) {
-    var_dump ($all_cases);
-  }
-}
 ?>
 
 <!doctype html>
@@ -58,11 +51,11 @@ if (isset($_POST['my_cases'])) {
   <p>
   <input type="text" name="description" placeholder="Введите новое дело" size="40" />
   <input type="submit" name="submit" value="Внести в список">
-  </p>
-  
+  </p> 
   <p>
-  <input type = "submit" name = "my_list" value = "Список моих дел">
-  <input type = "submit" name = "my_cases" value = "Список всех моих дел">
+  <input type = "submit" name = "my_list" value = "Мои дела">
+  <input type = "submit" name = "my_cases" value = "Делегированные дела">
+  <input type = "submit" name = "all_my_cases" value = "Все мои дела">
   </p></br>
 </form>  
 
@@ -125,8 +118,8 @@ if (isset($_POST['my_cases'])) {
 <?php endif; ?>
 
 <?php if (isset($_POST['my_cases'])) :
-  $my_cases = "SELECT * FROM task t INNER JOIN user u ON u.id=t.assigned_user_id WHERE
-  t.user_id = '$user_id' OR t.assigned_user_id = '$user_id'";
+  $my_cases = "SELECT * FROM task t INNER JOIN user u ON u.id=t.user_id WHERE
+  t.user_id != '$user_id' AND t.assigned_user_id = '$user_id'";
   $all_my_cases = $pdo->query($my_cases);
   ?>
 <table border="1">
@@ -136,7 +129,6 @@ if (isset($_POST['my_cases'])) {
     <td><h3><center>Дата</center></h3></td>
     <td><h3><center>Выполнено/Не выполнено</center></h3></td>
     <td><h3><center>Автор</center></h3></td>
-    <td><h3><center>Исполнитель</center></h3></td>
   </tr>
 </thead>
 <?php foreach ($all_my_cases as $all_cases) :
@@ -156,6 +148,42 @@ if (isset($_POST['my_cases'])) {
   <td><center><?php echo $all_my_dates ?></center></td>
   <td><center><?php echo $all_my_dones ?></center></td>
   <td><center><?php echo $all_my_names ?></center></td>
+</tr>
+</tbody>
+<?php endforeach; ?>
+<?php endif; ?> 
+
+<?php if (isset($_POST['all_my_cases'])) :
+  $my_cases_all = "SELECT * FROM task t INNER JOIN user u ON u.id=t.assigned_user_id WHERE
+  t.user_id = '$user_id' OR t.assigned_user_id = '$user_id'";
+  $my_cases_total = $pdo->query($my_cases_all);
+  ?>
+<table border="1">
+<thead>
+  <tr>
+    <td><h3><center>Дело</center></h3></td>
+    <td><h3><center>Дата</center></h3></td>
+    <td><h3><center>Выполнено/Не выполнено</center></h3></td>
+    <td><h3><center>Исполнитель</center></h3></td>
+  </tr>
+</thead>
+<?php foreach ($my_cases_total as $total_cases) :
+  $all_total_case = $total_cases['description'];
+  $all_total_dates = $total_cases['date_added'];
+  $all_total_dones = $total_cases['is_done'];
+  $all_total_names = $total_cases['login'];
+  if ($all_total_dones == 0) {
+    $all_total_dones = 'Не выполнено';
+  } else {
+    $all_total_dones = 'Выполнено';
+  }
+?>
+<tbody>
+<tr>
+  <td><center><?php echo $all_total_case ?></center></td>
+  <td><center><?php echo $all_total_dates ?></center></td>
+  <td><center><?php echo $all_total_dones ?></center></td>
+  <td><center><?php echo $all_total_names ?></center></td>
 </tr>
 </tbody>
 <?php endforeach; ?>
