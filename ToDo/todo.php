@@ -5,7 +5,7 @@ $user_id = $_SESSION['user_id'];
 $date = date('Y-m-d');
 $my_case = "SELECT * FROM task WHERE user_id = '$user_id' ORDER BY date_added ";
 $users = "SELECT * FROM user";
-$all_users = $pdo->query($users);
+$all_users = $pdo->query($users)->fetchAll();
 
 if (isset($_POST['submit'])) {
   $description = $_POST['description'];
@@ -22,6 +22,20 @@ if (isset($_POST['is_done'])) {
   $change_id = $_POST['case_id'];
   $change = "UPDATE task SET is_done='1' WHERE user_id= '$user_id' AND id= '$change_id' LIMIT 1";
   $change_is_done = $pdo->query($change);
+}
+if (isset($_POST['set_user_id'])) {
+  $case_id = $_POST['task_id'];
+  $set_user_id = $_POST['assigned_user_id'];
+  $set_user = "UPDATE task SET assigned_user_id='$set_user_id' WHERE id='$case_id' AND user_id='$user_id'";
+  $change_set_user = $pdo->query($set_user);
+}
+if (isset($_POST['my_cases'])) {
+  $my_cases = "SELECT * FROM task t INNER JOIN user u ON u.id=t.assigned_user_id WHERE
+  t.user_id = '$user_id' OR t.assigned_user_id = '$user_id'";
+  $all_my_cases = $pdo->query($my_cases);
+  foreach ($all_my_cases as $all_cases) {
+    var_dump ($all_cases);
+  }
 }
 ?>
 
@@ -48,6 +62,7 @@ if (isset($_POST['is_done'])) {
   
   <p>
   <input type = "submit" name = "my_list" value = "Список моих дел">
+  <input type = "submit" name = "my_cases" value = "Список всех моих дел">
   </p></br>
 </form>  
 
@@ -55,7 +70,7 @@ if (isset($_POST['is_done'])) {
 <table border="1">
 <thead>
   <tr>
-    <td><h3><center>Дела</center></h3></td>
+    <td><h3><center>Дело</center></h3></td>
     <td><h3><center>Дата</center></h3></td>
     <td><h3><center>Выполнено/Не выполнено</center></h3></td>
     <td><h3><center>Исполнитель</center></h3></td>
@@ -86,19 +101,17 @@ if (isset($_POST['is_done'])) {
   </center></td>
   <td><center> 
   <form method="POST">
-<input name="task_id" type="hidden" value="<?php echo $data_id ?>"> 
-<select name="assigned_user_id">
-<?php foreach ($all_users as $assignedUser):?>
-<option <?php if ($data_assigned_user_id == $assignedUser['id']):?>
-  selected<?php endif; ?> value="<?= $assignedUser['id'] ?>">
-  <?= $assignedUser['login'] ?>
-</option>
-<?php endforeach; ?>
-</select>
-<buttom type="submit">Делегировать</buttom>
-</form>
-  
-
+    <input name="task_id" type="hidden" value="<?php echo $data_id ?>"> 
+    <select name="assigned_user_id">
+    <?php foreach ($all_users as $assignedUser):?>
+    <option <?php if ($data_assigned_user_id == $assignedUser['id']):?>
+      selected<?php endif; ?> name = "set_id" value="<?= $assignedUser['id'] ?>">
+      <?= $assignedUser['login'] ?>
+    </option>
+    <?php endforeach; ?>
+    </select>
+    <input type="submit" name = "set_user_id" value = "Делегировать">
+  </form>
   </center></td>
   <td>
   <form method = "POST">
@@ -110,5 +123,43 @@ if (isset($_POST['is_done'])) {
 </tbody>
 <?php endforeach; ?>
 <?php endif; ?>
+
+<?php if (isset($_POST['my_cases'])) :
+  $my_cases = "SELECT * FROM task t INNER JOIN user u ON u.id=t.assigned_user_id WHERE
+  t.user_id = '$user_id' OR t.assigned_user_id = '$user_id'";
+  $all_my_cases = $pdo->query($my_cases);
+  ?>
+<table border="1">
+<thead>
+  <tr>
+    <td><h3><center>Дело</center></h3></td>
+    <td><h3><center>Дата</center></h3></td>
+    <td><h3><center>Выполнено/Не выполнено</center></h3></td>
+    <td><h3><center>Автор</center></h3></td>
+    <td><h3><center>Исполнитель</center></h3></td>
+  </tr>
+</thead>
+<?php foreach ($all_my_cases as $all_cases) :
+  $all_my_case = $all_cases['description'];
+  $all_my_dates = $all_cases['date_added'];
+  $all_my_dones = $all_cases['is_done'];
+  $all_my_names = $all_cases['login'];
+  if ($all_my_dones == 0) {
+    $all_my_dones = 'Не выполнено';
+  } else {
+    $all_my_dones = 'Выполнено';
+  }
+?>
+<tbody>
+<tr>
+  <td><center><?php echo $all_my_case ?></center></td>
+  <td><center><?php echo $all_my_dates ?></center></td>
+  <td><center><?php echo $all_my_dones ?></center></td>
+  <td><center><?php echo $all_my_names ?></center></td>
+</tr>
+</tbody>
+<?php endforeach; ?>
+<?php endif; ?> 
+
 </body>
 </html>
