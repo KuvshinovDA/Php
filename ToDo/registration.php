@@ -1,10 +1,3 @@
-<!-- <?php
-session_start();
-$pdo = new PDO("mysql:host=localhost;dbname=global", "kuvshinov", "root");
-
-
-?> -->
-
 <!DOCTYPE html>
 <html>
 <head>

@@ -14,26 +14,27 @@ if (isset($_POST['main_submit'])) {
     $same = "SELECT id FROM user WHERE login = '$new_login' AND password != '$new_password' ";
     $same_user = $pdo->query($same);
     $data_same_user = $same_user->fetch();
- 
      if ($data_same_user) {
        exit ('Пользователь с таким именем уже существует');
      }
  
- if ($data) {
+  if ($data) {
    $_SESSION['user_id'] = $data['id'];
- } else {
+  } else {
    $new = "INSERT INTO user (login, password) VALUES ('$new_login', '$new_password')";
      $new_user = $pdo->query($new);
-     $data_new_user = $new_user->fetch();
-     $_SESSION['user_id'] = $data_new_user['id'];
-   }  
- } else {
+     $data_new_user = $new_user->fetchAll();
+     $select_id = "SELECT id FROM user WHERE login = '$new_login' AND password = '$new_password' ";
+     $select_id_user = $pdo->query($select_id);
+     $data_select_id_user = $select_id_user->fetch();
+     $_SESSION['user_id'] = $data_select_id_user['id'];  
+    }  
+  } else {
      exit ('Для входа введите имя и пароль!');
-   }
- }
-
+    }
+  }
+  
 $user_id = $_SESSION['user_id'];
-//var_dump ($user_id);
 $date = date('Y-m-d');
 $my_case = "SELECT * FROM task WHERE user_id = '$user_id' ORDER BY date_added ";
 $users = "SELECT * FROM user";
