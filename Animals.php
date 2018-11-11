@@ -10,39 +10,32 @@ $continents = [
 ];
 
 $newContinents = [];
-foreach ($continents as $newPlace =>$animArray) {
-    foreach ($animArray as $newArray) {
-        if (strpos($newArray, ' ') !== false) {
-            array_push ($newContinents, $newArray);
-        }
-    }
-}
-echo '<pre>';
-print_r ($newContinents);
-
 $animalName = [];
 $animalSurname = [];
 foreach ($continents as $place =>$names) {
-    foreach ($names as $name) {
-        if (substr_count ($name, ' ') == 1) {
-    $pieses = explode (" ", $name);
-    $animalName[$place][] = $pieses[0];
-    $animalSurname[] = $pieses[1];
-    }
-  }
+  foreach ($names as $name) {
+    if (substr_count ($name, ' ') == 1) {
+      array_push ($newContinents, $name);       
+      $pieses = explode (" ", $name);
+      $animalName[$place][] = $pieses[0];
+      $animalSurname[] = $pieses[1];
+    }   
+  } 
 }
+echo '<pre>';
+print_r ($newContinents);
 
 shuffle($animalSurname);
 $newNames = [];
 $i = 0;
 foreach ($animalName as $place => $newAnimals) {
   foreach ($newAnimals as $newAnimal) {
-      $newNames[$place][] = $newAnimal ." ".$animalSurname[$i++];
-    }
+    $newNames[$place][] = $newAnimal ." ".$animalSurname[$i++];
+  }
 }
 
 foreach ($newNames as $continents =>$animals) {
-    echo "<h2>$continents</h2>";
-    echo (implode(", ", $animals). '.');
+  echo "<h2>$continents</h2>";
+  echo (implode(", ", $animals). '.');
 }
 ?>
