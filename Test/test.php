@@ -6,6 +6,7 @@ if (isset($_GET['name'])) {
   $uploadDir = 'tests';
   $fileName = $_GET['name'];
   $data = json_decode(file_get_contents(__DIR__ .DIRECTORY_SEPARATOR .$uploadDir .DIRECTORY_SEPARATOR .$fileName), true);
+  $a = '';
 }
 ?>
 <!doctype html>
@@ -17,12 +18,15 @@ if (isset($_GET['name'])) {
 <body>
 <h3>Выберите правильный ответ</h3>
 <form method="POST">
+
 <?php foreach ($data as $q) {
   $quest = $q['question'];
   $answers = $q['options'];
   $correctAnswerNum = $q['answer'];
   $name = $q['testNumber'];
-  $userAnswerNum = $_POST[$name];
+  if (!empty($_POST[$name])) {
+    $userAnswerNum = $_POST[$name];
+  }
   if (empty($_POST) || $correctAnswerNum !== $userAnswerNum) {
     $a = FALSE;
   } 
