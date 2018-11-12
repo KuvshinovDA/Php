@@ -4,6 +4,7 @@ if (!empty($_FILES)) {
   $name = $_FILES['testfile']['name'];
   move_uploaded_file ($_FILES['testfile']['tmp_name'], __DIR__  .DIRECTORY_SEPARATOR .$uploadDir .DIRECTORY_SEPARATOR .$name); 
   header('location:list.php');
+  exit;
 }
 ?>
 

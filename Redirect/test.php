@@ -1,7 +1,7 @@
 <?php
 if (!isset($_GET['name'])) {
-  header('location:404.php');
-  exit;
+  http_response_code(404);
+  exit('По вашему запросу ничего не найдено');
 }
 if (isset($_GET['name'])) {
   $uploadDir = 'tests';

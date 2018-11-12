@@ -45,4 +45,3 @@ imagedestroy($image);
 	echo "<p><b>$userName, вы ответили не верно, попробуйте еще раз.</b></p>";
 	echo "<p><br/><a href='list.php'>Перейти к выбору теста.</a></p>";
 }
-?>
