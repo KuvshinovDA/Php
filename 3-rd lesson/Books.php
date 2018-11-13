@@ -12,13 +12,13 @@ if (json_last_error()) {
 
 $file = fopen('./books.csv', 'w+');
 
-foreach ($data["items"] as $v) {
-  $id = $v["id"];
-  $title = $v["volumeInfo"]["title"];
-  if (isset($v["volumeInfo"]["authors"])) {
-    $authors = implode(" ", $v["volumeInfo"]["authors"]);
+foreach ($data['items'] as $v) {
+  $id = $v['id'];
+  $title = $v['volumeInfo']['title'];
+  if (isset($v['volumeInfo']['authors'])) {
+    $authors = implode(" ", $v['volumeInfo']['authors']);
   } else {
-    $authors = "";
+    $authors = '';
   }
 
   $row = [$id, $title, $authors];
@@ -26,6 +26,3 @@ foreach ($data["items"] as $v) {
 }
 
 fclose($file);
-
-
-?>
