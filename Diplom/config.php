@@ -1,8 +1,8 @@
 <?php return [
 	'mysql' => [
 		'host' => 'localhost',
-		'dbname' => 'global',
-		'user' => 'kuvshinov',
-		'pass' => 'root',
+		'dbname' => 'diplom',
+		'user' => 'admin',
+		'pass' => 'admin',
 	]
 ];

@@ -22,7 +22,7 @@ class Di
         $config = $this->config();
         try {
             $db = new PDO(
-                "mysql:host=localhost;dbname=global", "kuvshinov", "root"  // Поменять путь на config
+                "mysql:host=localhost;dbname=diplom", "admin", "admin"  // Поменять путь на config
             );
         } catch (PDOException $e) {
             die('Database error: '.$e->getMessage().'<br/>');
