@@ -1,6 +1,4 @@
 <?php 
-
-// Обработка введенных данных от пользователя
 session_start();
 
 if (! isset($_REQUEST['c']) || ! isset($_REQUEST['a'])) {
@@ -11,22 +9,42 @@ if (! isset($_REQUEST['c']) || ! isset($_REQUEST['a'])) {
 }
 
 if ($controller == 'users') {
-  include 'controllers/users_controller.php';
+  include 'controllers/AdminsController.php';
 
-  $users_controller = new UsersController();
-  if ($action == 'reg') {
-    $users_controller->registration();
-  } elseif ($action == 'auth') {
-    $users_controller->auth();
+  $admins_controller = new AdminsController();
+  if ($action == 'auth') {
+    $admins_controller->registration();
+  } elseif ($action == 'user') {
+    $admins_controller->go_to();
+  } elseif ($action == 'mainAdmin') {
+    $admins_controller->adminPage();
+  } elseif ($action == 'all_admin') {
+    $admins_controller->show_all_admin();
+  } elseif ($action == 'add_admin') {
+    $admins_controller->add_admin_page();
+  } elseif ($action == 'add_new_admin') {
+    $admins_controller->add_new_admin();
+  } elseif ($action == 'change_password') {
+    $admins_controller->change_password();
+  } elseif ($action == 'new_pass') {
+    $admins_controller->new_password();
+  } elseif ($action == 'delAdmin') {
+    $admins_controller->delAdmin();
+  } elseif ($action == 'cancelDelAdmin') {
+    $admins_controller->show_all_admin();
+  } elseif ($action == 'confirmDelAdmin') {
+    $admins_controller->confirmDelAdmin();
+  } else {
+    $admins_controller->index();
   }
-   else {
-    $users_controller->index();
-  }
-} elseif ($controller == 'cases') {
-  include 'controllers/cases_controller.php';
-  $cases_controller = new CasesController();
-  $cases_controller->index();
-}
+  
+} 
+
+// if ($controller == 'cases') {
+//   include 'controllers/cases_controller.php';
+//   $cases_controller = new CasesController();
+//   $cases_controller->index();
+// }
 // include 'controller/cases_controller.php';
 // $cases_controller = new CasesController();
 // if ($action == 'reg') {

@@ -1,5 +1,5 @@
 <?php 
-include 'base_controller.php';
+include 'BaseController.php';
 
 class CasesController extends BaseController {
   function index() {

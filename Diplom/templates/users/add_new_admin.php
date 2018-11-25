@@ -6,16 +6,17 @@
 </head>
 <body>
 <p><h2>Создать нового администратора</h2></p>
-<form action = "" method="POST">
-  <input type="hidden" name="" value="">
-  <input type="hidden" name="" value="">
+<? echo $error?>
+<form action = "index.php" method="POST">
+  <input type="hidden" name="c" value="users">
+  <input type="hidden" name="a" value="add_new_admin">
   <label>
     <p><input type="text" placeholder="Введите новый логин" name="login"></p>
   </label>
   <label>
-    <p><input type="text" placeholder="Введите новый пароль" name="email"></p>
+    <p><input type="text" placeholder="Введите новый пароль" name="password"></p>
   </label>
-  <input type="submit" name ="add_new_admin" value="Создать администратора">
+  <input type="submit" name ="add_admin" value="Создать администратора">
 </form>
 </body>
 </html>
