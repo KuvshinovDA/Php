@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 03 2018 г., 18:16
+-- Время создания: Дек 04 2018 г., 15:39
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -49,11 +49,19 @@ INSERT INTO `admin` (`id`, `login`, `password`) VALUES
 
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
-  `author` int(11) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `date_added` timestamp NULL DEFAULT NULL
+  `question_id` int(11) DEFAULT NULL,
+  `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `answers`
+--
+
+INSERT INTO `answers` (`id`, `description`, `question_id`, `date_added`) VALUES
+(11, 'qwert', 5, '2018-12-04 10:52:14'),
+(12, 'Туда', 2, '2018-12-04 12:13:59'),
+(13, 'Так надо', 3, '2018-12-04 12:17:43');
 
 -- --------------------------------------------------------
 
@@ -72,7 +80,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `author`) VALUES
-(2, 'phones', 'admin');
+(2, 'phones', 'admin'),
+(3, 'cars', 'admin'),
+(5, 'books', 'admin');
 
 -- --------------------------------------------------------
 
@@ -87,8 +97,17 @@ CREATE TABLE `questions` (
   `description` varchar(500) NOT NULL,
   `is_done` tinyint(1) NOT NULL DEFAULT '0',
   `hide` tinyint(1) NOT NULL DEFAULT '0',
-  `date_added` timestamp NULL DEFAULT NULL
+  `date_added` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `questions`
+--
+
+INSERT INTO `questions` (`id`, `category_id`, `author`, `description`, `is_done`, `hide`, `date_added`) VALUES
+(2, 2, 'Masha', 'Куда', 1, 0, '2018-12-03 15:26:11'),
+(3, 2, 'Sasha', 'Зачем', 1, 0, '2018-12-03 15:27:03'),
+(5, 3, 'Петя', 'Почему', 1, 0, '2018-12-03 15:28:28');
 
 -- --------------------------------------------------------
 
@@ -144,25 +163,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `user`

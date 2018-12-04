@@ -78,6 +78,12 @@ $casesController = new CasesController();
         $casesController->EditAnswer(); 
     } elseif ($action == 'allNotanswerQuest') {
         $casesController->AllNotanswerQuest(); 
+    } elseif ($action == 'newAnswer') {
+        $casesController->NewAnswer(); 
+    } elseif ($action == 'editOldAnswer') {
+        $casesController->EditOldAnswer(); 
+    } elseif ($action == 'confirmChangeAnswer') {
+        $casesController->ConfirmChangeAnswer(); 
     } 
 }
 

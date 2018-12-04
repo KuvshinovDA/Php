@@ -71,6 +71,14 @@ class Questions
         return $sth->fetchAll();
     }
 
+    static function ShowAnswer($changeId)
+    {
+        $sth = Di::get()->db()->prepare("SELECT description FROM answers WHERE question_id = :id");
+        $sth->bindValue(':id', $changeId);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
     static function new_author($id, $name) 
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET author= :name WHERE id = :id");
@@ -125,5 +133,34 @@ class Questions
         return $sth->fetchAll();
     }
 
+    static function NewAnswer($id, $answer)
+    {
+        $sth = Di::get()->db()->prepare("INSERT INTO answers (description, question_id) 
+        VALUES (:description, :question_id)");
+        $sth->bindValue(':question_id', $id);
+        $sth->bindValue(':description', $answer);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
+    static function ChangeIsDone($id)
+    {
+        $sth = Di::get()->db()->prepare("UPDATE questions SET is_done = 1 WHERE id = :id");
+        $sth->bindValue(':id', $id);
+        $sth->execute();
+        return $sth->fetch();
+    }
+
+    static function ChangeAnswer($id, $answer)
+    {
+        $sth = Di::get()->db()->prepare("UPDATE answers SET description = :description 
+        WHERE question_id = :question_id");
+        $sth->bindValue(':question_id', $id);
+        $sth->bindValue(':description', $answer);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
+    
     
 }

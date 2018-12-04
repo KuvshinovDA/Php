@@ -53,13 +53,24 @@
     <p><input type="submit" name ="edit_quest" value="Редактировать"></p>
     </form>
   </center></td>
-  <td><center><?php  ?>
-    <form action = "index.php" method = "POST">
+  <td><center><?php foreach ($showAnswer as $answer) :
+      echo $answer['description'];
+  ?>
+  <form action = "index.php" method = "POST">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="editAnswer">
+    <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
+    <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
+    <p><input type="submit" name ="edit_answ" value="Ответить"></p>
+  </form>
+  <form action = "index.php" method = "POST">
+    <input type="hidden" name="c" value="cases">
+    <input type="hidden" name="a" value="editOldAnswer">
+    <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
     <p><input type="submit" name ="change_answ" value="Редактировать"></p>
-    </form>
+  </form>
+  <?php endforeach; ?>
   </center></td>
   <td><center><?php echo $hide ?>
     <form action = "index.php" method = "POST">

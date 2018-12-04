@@ -77,8 +77,9 @@ class CasesController extends BaseController
         $changeId = $_POST['changeId'];
         $editQuestion = Questions::edit_question($changeId);
         $editCategory = Questions::edit_cat();
+        $showAnswer = Questions::ShowAnswer($changeId);
         $this->render('cases/editAllQuest', ['editQuestion' => $editQuestion,
-        'editCategory' => $editCategory]);
+        'editCategory' => $editCategory, 'showAnswer' => $showAnswer]);
     }
 
     function ConfirmChangeAuthor()
@@ -127,7 +128,6 @@ class CasesController extends BaseController
 
     function EditAnswer()
     {
-        $name = $_POST['desc'];
         $this->render('cases/editAnswer');
     }
 
@@ -135,6 +135,28 @@ class CasesController extends BaseController
     {
          $allNotanswerQuest = Questions::AllNotanswerQuest();
         $this->render('cases/allNotanswerQuest', ['allNotanswerQuest' => $allNotanswerQuest]);
+    }
+
+    function NewAnswer() 
+    {
+        $id = $_POST['changeId'];
+        $answer = $_POST['answer'];
+        $newAnswer = Questions::NewAnswer($id, $answer);
+        $ChangeIsDone = Questions::ChangeIsDone($id);
+        $this->render('cases/confirmAnswer');
+    }
+
+    function EditOldAnswer()
+    {
+        $this->render('cases/changeAnswer');
+    }
+
+    function ConfirmChangeAnswer() 
+    {
+        $id = $_POST['changeId'];
+        $answer = $_POST['answer'];
+        $chahgeAnswer = Questions::ChangeAnswer($id, $answer);
+        $this->render('cases/confirmAnswer');
     }
 
    
