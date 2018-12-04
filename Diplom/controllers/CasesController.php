@@ -159,6 +159,32 @@ class CasesController extends BaseController
         $this->render('cases/confirmAnswer');
     }
 
+    function NewQuestion() 
+    {
+        $editCategory = Questions::edit_cat();
+        $this->render('cases/newQuestion', ['editCategory' => $editCategory]);
+    }
+
+    function NewUserQuestion() 
+    {
+        $name = $_POST['userName'];
+        $email = $_POST['userEmail'];
+        $question = $_POST['question'];
+        $category = $_POST['category'];
+        if (empty($name) || empty($email) || empty($question) || empty($category)) {
+            $error = 'Для входа введите все данные!';
+            $this->render('cases/newQuestion', ['error' => $error]);
+            var_dump ($name);
+            var_dump ($email);
+            var_dump ($question);
+            var_dump ($category);
+            return;
+        } else {
+            $chahgeAnswer = Questions::NewUserQuestion($name, $email, $question, $category);
+            $this->render('cases/index');
+        }
+    }
+
    
 
 }

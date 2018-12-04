@@ -161,6 +161,18 @@ class Questions
         return $sth->fetchAll();
     }
 
+    static function NewUserQuestion($name, $email, $question, $category)
+    {
+        $sth = Di::get()->db()->prepare("INSERT INTO questions (category_id, author, email, description)
+        VALUES (:category, :name, :email, :question)");
+        $sth->bindValue(':category', $category);
+        $sth->bindValue(':name', $name);
+        $sth->bindValue(':email', $email);
+        $sth->bindValue(':question', $question);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
     
     
 }

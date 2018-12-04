@@ -84,6 +84,10 @@ $casesController = new CasesController();
         $casesController->EditOldAnswer(); 
     } elseif ($action == 'confirmChangeAnswer') {
         $casesController->ConfirmChangeAnswer(); 
+    } elseif ($action == 'newQuestion') {
+        $casesController->NewQuestion(); 
+    } elseif ($action == 'newUserQuestion') {
+        $casesController->NewUserQuestion(); 
     } 
 }
 
