@@ -16,7 +16,12 @@
   <label>
     <p><input type="text" placeholder="Введите новый пароль" name="password"></p>
   </label>
-  <input type="submit" name ="add_admin" value="Создать администратора">
+  <input type="submit" name ="add_admin" value="Подтвердить создание">
+</form></br>
+<form method = "POST">
+  <input type="hidden" name="c" value="users">
+  <input type="hidden" name="a" value="mainAdmin">
+  <input type = "submit" name = "main" value = 'Вернуться на главную страницу'>
 </form>
 </body>
 </html>

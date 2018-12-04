@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 22 2018 г., 20:36
--- Версия сервера: 5.6.37
--- Версия PHP: 7.1.7
+-- Время создания: Дек 03 2018 г., 18:16
+-- Версия сервера: 5.6.41
+-- Версия PHP: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,13 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `admin`
+--
+
+INSERT INTO `admin` (`id`, `login`, `password`) VALUES
+(1, 'admin', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -51,14 +58,21 @@ CREATE TABLE `answers` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `category`
+-- Структура таблицы `categories`
 --
 
-CREATE TABLE `category` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `author` int(11) NOT NULL
+  `author` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `author`) VALUES
+(2, 'phones', 'admin');
 
 -- --------------------------------------------------------
 
@@ -105,9 +119,9 @@ ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `category`
+-- Индексы таблицы `categories`
 --
-ALTER TABLE `category`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -130,27 +144,32 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;;
+
 --
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT для таблицы `category`
+-- AUTO_INCREMENT для таблицы `categories`
 --
-ALTER TABLE `category`
+ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

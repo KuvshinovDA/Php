@@ -24,9 +24,6 @@
   <input type="hidden" name="a" value="mainAdmin">
   <input type = "submit" name = "main" value = 'Вернуться на главную страницу'>
 </form></br>
-<form method = "POST">
-  <input type = "submit" name = "exit" value = 'Выход'>
-</form></br>
 <table border="1">
 <thead>
   <tr>

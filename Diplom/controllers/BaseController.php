@@ -1,7 +1,9 @@
 <?php
 
-class BaseController {
-  function redirect($controller, $action) {
+class BaseController 
+{
+  function redirect($controller, $action) 
+  {
     header("Location: index.php?c=$controller&a=$action");
   }
 
