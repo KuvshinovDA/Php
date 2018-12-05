@@ -98,6 +98,6 @@ $casesController = new CasesController();
     if ($action == 'changeAuthor') {
         $UsersController->ChangeAuthor();
     } 
-    
+        
 }
     

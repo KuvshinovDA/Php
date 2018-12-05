@@ -16,12 +16,12 @@
 	<h1>FAQ</h1>
 </header>
 </br><form method = "POST">
-  <input type = "submit" name = "exit" value = 'Выход'>
+    <input type = "submit" name = "exit" value = 'Выход'>
 </form></br>
 <form action = "index.php" method = "POST">
-  <input type="hidden" name="c" value="cases">
-  <input type="hidden" name="a" value="newQuestion">
-  <input type = "submit" name = "exit" value = 'Задать новый вопрос'>
+	<input type="hidden" name="c" value="cases">
+	<input type="hidden" name="a" value="newQuestion">
+	<input type = "submit" name = "exit" value = 'Задать новый вопрос'>
 </form>
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
@@ -32,13 +32,15 @@
 
 	<div class="cd-faq-items">
 		<ul id="basics" class="cd-faq-group">
-		<?php foreach ($allUserQuestions as $allQuestions) : ?> 
-			<li class="cd-faq-title"><h2><?php echo $allQuestions['categories'] ?></h2></li>
+		<?php foreach ($allUserQuestions as $allQuestions) :?> 
+			<li class="cd-faq-title"><h2><?php echo $allQuestions['category'] ?></h2></li>
 			<li>
-				<a class="cd-faq-trigger" href="#0"><?php echo $allQuestions['questions'] ?>?</a>
+			<?php foreach ($allQuestions['questions'] as $questions) :?>
+				<a class="cd-faq-trigger" href="#0"><?php echo $questions['question'] ?>?</a>
 				<div class="cd-faq-content">
-					<p><?php echo $allQuestions['answers'] ?></p>
+					<p><?php echo $questions['answer'] ?></p>
 				</div> <!-- cd-faq-content -->
+			<?php endforeach; ?>
 			</li> 
         <?php endforeach; ?>
 		</ul> <!-- cd-faq-group -->

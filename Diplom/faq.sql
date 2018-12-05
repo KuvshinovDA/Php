@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 04 2018 г., 23:21
+-- Время создания: Дек 05 2018 г., 22:10
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -59,9 +59,11 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `description`, `question_id`, `date_added`) VALUES
-(11, 'qwert', 5, '2018-12-04 10:52:14'),
+(11, 'Вот так', 5, '2018-12-04 10:52:14'),
 (12, 'Туда', 2, '2018-12-04 12:13:59'),
-(13, 'Так надо', 3, '2018-12-04 12:17:43');
+(13, 'Так надо', 3, '2018-12-04 12:17:43'),
+(14, 'Всегда', 6, '2018-12-05 11:11:01'),
+(15, 'Скоро', 7, '2018-12-05 11:41:30');
 
 -- --------------------------------------------------------
 
@@ -106,22 +108,12 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `category_id`, `author`, `email`, `description`, `is_done`, `hide`, `date_added`) VALUES
-(2, 2, 'Masha', '', 'Куда', 1, 0, '2018-12-03 15:26:11'),
-(3, 2, 'Sasha', '', 'Зачем', 1, 0, '2018-12-03 15:27:03'),
+(2, 2, 'Masha', '', 'Куда', 1, 1, '2018-12-03 15:26:11'),
+(3, 2, 'Sasha', '', 'Зачем', 1, 1, '2018-12-03 15:27:03'),
 (5, 3, 'Петя', '', 'Почему', 1, 0, '2018-12-03 15:28:28'),
-(6, 2, 'Дима', 'йцу@nd.ru', 'qwer', 0, 0, '2018-12-04 19:46:16');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `login` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(6, 2, 'Дима', 'йцу@nd.ru', 'qwer', 1, 1, '2018-12-04 19:46:16'),
+(7, 5, 'Дима', 'фыв@пропо', 'Когда уже', 1, 1, '2018-12-05 11:17:17'),
+(8, 5, 'Дима', 'йцу@nd.ru', 'Можно ли', 0, 0, '2018-12-05 11:32:08');
 
 --
 -- Индексы сохранённых таблиц
@@ -152,12 +144,6 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -171,7 +157,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -183,13 +169,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT для таблицы `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

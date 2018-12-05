@@ -32,7 +32,6 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
 
     function go_to() 
     {
-        // Главное юзер------------------------------------------------
         $editCategory = Questions::edit_cat();
         $allUserQuestions = Questions::AllUserQuestions();
         $this->render('cases/index', ['editCategory' => $editCategory, 

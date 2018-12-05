@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Страница администратора</title>
+    <meta charset="UTF-8">
+    <title>Страница администратора</title>
 </head>
 <body>
 <p><h2>Страница администратора</h2></p>
 <form action = "index.php" name = "all_adm" method="POST">
-  <input type="hidden" name="c" value="users">
-  <input type="hidden" name="a" value="all_admin">
-  <p><input type="submit" name="all_admin" value = "Все администраторы"></p>
+    <input type="hidden" name="c" value="users">
+    <input type="hidden" name="a" value="all_admin">
+    <p><input type="submit" name="all_admin" value = "Все администраторы"></p>
 </form>
 <form action = "index.php" method="POST">
-  <input type="hidden" name="c" value="cases">
-  <input type="hidden" name="a" value="allCategories">
-  <p><input type="submit" name="allCat" value = "Список всех категорий"></p>
+    <input type="hidden" name="c" value="cases">
+    <input type="hidden" name="a" value="allCategories">
+    <p><input type="submit" name="allCat" value = "Список всех категорий"></p>
 </form>
 <form action = "index.php" method="POST">
-  <input type="hidden" name="c" value="cases">
-  <input type="hidden" name="a" value="allNotanswerQuest">
-  <p><input type="submit" name="allNotanswerQuest" value = "Cписок всех вопросов без ответа"></p>
-</form>
+    <input type="hidden" name="c" value="cases">
+    <input type="hidden" name="a" value="allNotanswerQuest">
+    <p><input type="submit" name="allNotanswerQuest" value = "Cписок всех вопросов без ответа"></p>
+    </form>
 <form method = "POST">
-  <input type = "submit" name = "exit" value = 'Выход'>
+    <input type = "submit" name = "exit" value = 'Выход'>
 </form>
 </body>
 </html>

@@ -182,9 +182,16 @@ class Questions
         JOIN categories ON categories.id = questions.category_id 
         WHERE questions.hide = 1");
         $sth->execute();
-        return $sth->fetchAll();
+        $rawAllUserQuestions = $sth->fetchAll();
+        $allUserQuestions = [];
+        foreach ($rawAllUserQuestions as $allUserQuestion)
+        {
+        $allUserQuestions[$allUserQuestion['id']]['category'] = $allUserQuestion['categories'];
+        $allUserQuestions[$allUserQuestion['id']]['questions'][] = [
+        'question' =>  $allUserQuestion['questions'],
+        'answer' =>  $allUserQuestion['answers'] ];     
+        }
+        return $allUserQuestions;
     }
-
-    
-    
+  
 }

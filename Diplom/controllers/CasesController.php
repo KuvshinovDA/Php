@@ -62,7 +62,6 @@ class CasesController extends BaseController
     function DelQuestion()
     {
         $this->render('cases/delQuestion');
-        //self::OpenCategory();
     }
 
     function ConfirmDelQuestion()
@@ -183,7 +182,4 @@ class CasesController extends BaseController
             'allUserQuestions' => $allUserQuestions]);
         }
     }
-
-   
-
 }

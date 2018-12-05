@@ -12,14 +12,10 @@ class Di
     }
     return self::$di;
   }
-  // public function config()
-  // {
-  //     $config = include 'config.php';
-  //     return $config;
-  //}
+  
   public function db()
   {
-    //$config = $this->config();
+    
     try {
       $db = new PDO(  
         "mysql:host=localhost;dbname=diplom", "admin", "admin"

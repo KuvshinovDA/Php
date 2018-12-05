@@ -3,9 +3,9 @@
 class BaseController 
 {
   function redirect($controller, $action) 
-  {
-    header("Location: index.php?c=$controller&a=$action");
-  }
+    {
+        header("Location: index.php?c=$controller&a=$action");
+    }
 
   public function render($template, $params = [])
     {
