@@ -6,7 +6,7 @@ class Questions
     {
         $sth = Di::get()->db()->prepare("SELECT categories.id as catId, categories.name AS categories, 
         COUNT(questions.category_id) AS total,
-        COUNT(IF(questions.is_done='1',1,NULL)) AS done, COUNT(IF(questions.hide='0',1,NULL)) AS hide 
+        COUNT(IF(questions.is_done='0',1,NULL)) AS done, COUNT(IF(questions.hide='1',1,NULL)) AS hide 
         FROM categories LEFT JOIN questions 
         ON questions.category_id = categories.id GROUP BY categories.name");
         $sth->execute();
@@ -169,6 +169,18 @@ class Questions
         $sth->bindValue(':name', $name);
         $sth->bindValue(':email', $email);
         $sth->bindValue(':question', $question);
+        $sth->execute();
+        return $sth->fetchAll();
+    }
+
+    static function AllUserQuestions()
+    {
+        $sth = Di::get()->db()->prepare("SELECT categories.id as id, categories.name as categories, 
+        questions.description as questions, answers.description as answers 
+        FROM answers 
+        JOIN questions ON answers.question_id = questions.id 
+        JOIN categories ON categories.id = questions.category_id 
+        WHERE questions.hide = 1");
         $sth->execute();
         return $sth->fetchAll();
     }

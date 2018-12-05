@@ -174,14 +174,13 @@ class CasesController extends BaseController
         if (empty($name) || empty($email) || empty($question) || empty($category)) {
             $error = 'Для входа введите все данные!';
             $this->render('cases/newQuestion', ['error' => $error]);
-            var_dump ($name);
-            var_dump ($email);
-            var_dump ($question);
-            var_dump ($category);
             return;
         } else {
             $chahgeAnswer = Questions::NewUserQuestion($name, $email, $question, $category);
-            $this->render('cases/index');
+            $editCategory = Questions::edit_cat();
+            $allUserQuestions = Questions::AllUserQuestions();
+            $this->render('cases/index', ['editCategory' => $editCategory, 
+            'allUserQuestions' => $allUserQuestions]);
         }
     }
 

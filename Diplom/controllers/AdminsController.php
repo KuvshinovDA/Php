@@ -2,6 +2,7 @@
 session_start();
 include 'BaseController.php';
 include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/admin.php';
+include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
 
     class AdminsController extends BaseController 
     {
@@ -31,7 +32,11 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/admin.php';
 
     function go_to() 
     {
-        $this->render('cases/index');
+        // Главное юзер------------------------------------------------
+        $editCategory = Questions::edit_cat();
+        $allUserQuestions = Questions::AllUserQuestions();
+        $this->render('cases/index', ['editCategory' => $editCategory, 
+        'allUserQuestions' => $allUserQuestions]);
     }
 
     function adminPage() 

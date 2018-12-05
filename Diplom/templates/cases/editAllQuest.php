@@ -53,8 +53,10 @@
     <p><input type="submit" name ="edit_quest" value="Редактировать"></p>
     </form>
   </center></td>
-  <td><center><?php foreach ($showAnswer as $answer) :
+  <td><center><?php foreach ($showAnswer as $answer) 
+  {
       echo $answer['description'];
+  }
   ?>
   <form action = "index.php" method = "POST">
     <input type="hidden" name="c" value="cases">
@@ -70,7 +72,7 @@
     <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
     <p><input type="submit" name ="change_answ" value="Редактировать"></p>
   </form>
-  <?php endforeach; ?>
+  
   </center></td>
   <td><center><?php echo $hide ?>
     <form action = "index.php" method = "POST">

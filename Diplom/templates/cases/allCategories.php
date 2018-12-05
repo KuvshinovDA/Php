@@ -39,8 +39,8 @@
 <tr>
   <td><center><?php echo $AllCat['categories'] ?></center></td>
   <td><center><?php echo $AllCat['total'] ?></center></td>
-  <td><center><?php echo $AllCat['done'] ?></center></td>
   <td><center><?php echo $AllCat['hide'] ?></center></td>
+  <td><center><?php echo $AllCat['done'] ?></center></td>
   <td><center>
   <form style="display: inline-block" method = "POST">
     <input type="hidden" name="c" value="cases">
