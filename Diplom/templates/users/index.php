@@ -13,7 +13,7 @@
         <p><input type="text" placeholder="Имя" name="login"></p>
         </label>
         <label>
-        <p><input type="text" placeholder="Пароль" name="password"></p>
+        <p><input type="password" placeholder="Пароль" name="password"></p>
         </label>
     <input type="submit" name ="submit_reg" value="Войти как администратор">
     </form>
