@@ -1,6 +1,8 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
-ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors',true);
+ini_set('html_errors',true);
+ini_set('error_reporting',E_ALL);
 
 class Di
 {
@@ -27,4 +29,4 @@ class Di
   }
 }
 
-include 'router\router_cases.php';
+include 'router/router_cases.php';

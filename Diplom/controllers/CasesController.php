@@ -23,10 +23,8 @@ class CasesController extends BaseController
         self::ShowAllCategories();
     }
 
-    function FindCategory()
+    function FindCategory($name, $login)
     {
-        $name = $_POST['newCategory'];
-        $login = $_POST['login'];
         $sameCategory = Questions::find_category($name);
         if ($sameCategory) {
             $error = 'Такая категория уже существует!';
@@ -35,7 +33,7 @@ class CasesController extends BaseController
             return;
         } else {
             $addCategory = Questions::add_category($login, $name);
-            self::ShowAllCategories(); 
+            BaseController::redirect('cases','allCategories');
         }
     }
 
@@ -45,16 +43,14 @@ class CasesController extends BaseController
         self::ShowAllCategories();
     }
 
-    function ConfirmDelCategory()
+    function ConfirmDelCategory($category)
     {
-        $category = $_POST['category'];
         $confirmDelCat = Questions::delete_category($category);
         self::ShowAllCategories();
     }
 
-    function OpenCategory()
+    function OpenCategory($catId)
     {
-        $catId = $_POST['catId'];
         $showCatQuest = Questions::show_cat_questions($catId);
         $this->render('cases/allCategoryQuest', ['showCatQuest' => $showCatQuest]);
     }
@@ -64,16 +60,14 @@ class CasesController extends BaseController
         $this->render('cases/delQuestion');
     }
 
-    function ConfirmDelQuestion()
+    function ConfirmDelQuestion($id)
     {
-        $id = $_POST['id'];
         $delQuestion = Questions::delete_questions($id);
-        self::OpenCategory(); 
+        BaseController::redirect('cases','allCategories');
     }
 
-    function ChangeQuest()
+    function ChangeQuest($changeId)
     {
-        $changeId = $_POST['changeId'];
         $editQuestion = Questions::edit_question($changeId);
         $editCategory = Questions::edit_cat();
         $showAnswer = Questions::ShowAnswer($changeId);
@@ -81,12 +75,14 @@ class CasesController extends BaseController
         'editCategory' => $editCategory, 'showAnswer' => $showAnswer]);
     }
 
-    function ConfirmChangeAuthor()
+    function ConfirmChangeAuthor($id, $name)
     {
-        $id = $_POST['changeId'];
-        $name = $_POST['changeAuthor'];
+        if (empty($name)) {
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        } else {
         $changeAuth = Questions::new_author($id, $name);
-        self::ChangeQuest();
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
+        }
     }
 
     function ChangeDesc()
@@ -94,39 +90,41 @@ class CasesController extends BaseController
         $this->render('cases/editQuest');
     }
 
-    function ConfirmChangeDescription()
+    function ConfirmChangeDescription($id, $name)
     {
-        $id = $_POST['changeId'];
-        $name = $_POST['description'];
         $changeDesc = Questions::new_description($id, $name);
-        self::ChangeQuest();
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
-    function Publish()
+    function Publish($id)
     {
-        $id = $_POST['changeId'];
         $publish = Questions::Publish($id);
-        self::ChangeQuest();
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
-    function Hide()
+    function Hide($id)
     {
-        $id = $_POST['changeId'];
         $Hide = Questions::Hide($id);
-        self::ChangeQuest();
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
-    function ChangeCategory()
+    function ChangeCategory($id, $changeCat)
     {
-        $id = $_POST['changeId'];
-        $changeCat = $_POST['categoryEdit'];
+        if (empty($changeCat)) {
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+            var_dump ($id);
+        } else {
         $ChangeCategory = Questions::ChangeCategory($id, $changeCat);
-        self::ShowAllCategories();
-        
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
+        }
     }
 
-    function EditAnswer()
+    function EditAnswer($id)
     {
+        $sameAnswer = Questions::SameAnswer($id);
+        if ($sameAnswer) {
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        }
         $this->render('cases/editAnswer');
     }
 
@@ -136,13 +134,15 @@ class CasesController extends BaseController
         $this->render('cases/allNotanswerQuest', ['allNotanswerQuest' => $allNotanswerQuest]);
     }
 
-    function NewAnswer() 
+    function NewAnswer($changeId, $answer) 
     {
-        $id = $_POST['changeId'];
-        $answer = $_POST['answer'];
-        $newAnswer = Questions::NewAnswer($id, $answer);
-        $ChangeIsDone = Questions::ChangeIsDone($id);
+        if(empty($answer)) {
+            BaseController::redirect('cases', "changeQuest&changeId= $changeId");
+        } else {
+        $newAnswer = Questions::NewAnswer($changeId, $answer);
+        $ChangeIsDone = Questions::ChangeIsDone($changeId);
         $this->render('cases/confirmAnswer');
+        }
     }
 
     function EditOldAnswer()
@@ -150,12 +150,10 @@ class CasesController extends BaseController
         $this->render('cases/changeAnswer');
     }
 
-    function ConfirmChangeAnswer() 
+    function ConfirmChangeAnswer($id, $answer) 
     {
-        $id = $_POST['changeId'];
-        $answer = $_POST['answer'];
         $chahgeAnswer = Questions::ChangeAnswer($id, $answer);
-        $this->render('cases/confirmAnswer');
+        BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
     function NewQuestion() 
@@ -171,15 +169,15 @@ class CasesController extends BaseController
         $question = $_POST['question'];
         $category = $_POST['category'];
         if (empty($name) || empty($email) || empty($question) || empty($category)) {
-            $error = 'Для входа введите все данные!';
-            $this->render('cases/newQuestion', ['error' => $error]);
+            $error = 'Введите все данные для создания нового вопроса';
+            $editCategory = Questions::edit_cat();
+            $this->render('cases/newQuestion', ['error' => $error, 'editCategory' => $editCategory]);
             return;
-        } else {
+        } else { 
             $chahgeAnswer = Questions::NewUserQuestion($name, $email, $question, $category);
             $editCategory = Questions::edit_cat();
             $allUserQuestions = Questions::AllUserQuestions();
-            $this->render('cases/index', ['editCategory' => $editCategory, 
-            'allUserQuestions' => $allUserQuestions]);
+            BaseController::redirect('users','user');
         }
     }
 }

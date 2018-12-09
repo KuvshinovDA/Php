@@ -14,16 +14,18 @@
 </head>
 <body>
 <p><h3>Все администраторы</h3></p>
-<form method = "POST">
+<form method = "GET">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="add_admin">
     <input type = "submit" name = "add_admin" value = 'Создать нового администратора'>
 </form></br>
-<form method = "POST">
+<form method = "GET">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="mainAdmin">
     <input type = "submit" name = "main" value = 'Вернуться на главную страницу'>
-</form></br>
+</form>
+
+</br></br>
 <table border="1">
 <thead>
     <tr>
@@ -33,27 +35,29 @@
     </tr>
 </thead>
 <tbody>
-<?php foreach ($show_admin as $adm) :
-?>
+
+<?php 
+
+foreach ($show_admin as $adm) { ?>
 <tr>
-    <td><center><?php echo $adm['login'] ?></center></td>
-    <td><center><?php echo $adm['password'] ?></center></td>
+    <td><center><?=$adm['login'] ?></center></td>
+    <td><center><?=$adm['password'] ?></center></td>
     <td><center>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="users">
         <input type="hidden" name="a" value="change_password">
         <input type="hidden" name="login" value="<?php echo $adm['login'] ?>">
         <input type = "submit" name = "change_pass" value = 'Изменить пароль'>
     </form>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="users">
         <input type="hidden" name="a" value="delAdmin">
         <input type="hidden" name="login" value="<?php echo $adm['login'] ?>">
         <input type = "submit" name = "deleteAdm" value = 'Удалить администратора'>
     </form>
     </center></td>
-    </tr>
-<?php endforeach;?>
-  </tbody>
-  </body>
-  </html>
+</tr>
+<?php } ?>
+</tbody>
+</body>
+</html>

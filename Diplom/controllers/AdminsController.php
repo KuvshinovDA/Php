@@ -4,17 +4,15 @@ include 'BaseController.php';
 include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/admin.php';
 include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
 
-    class AdminsController extends BaseController 
+class AdminsController extends BaseController 
     {
     function index() 
     {
         $this->render('users/index');
     }
 
-    function registration() 
+    function registration($login, $password) 
     {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
         $admin = Admin::find_by_login($login, $password);
         if (empty($login) || empty($password)) {
             $error = 'Для входа введите имя и пароль';
@@ -56,10 +54,8 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
         $this->render('users/add_new_admin');
     }
 
-    function add_new_admin() 
+    function add_new_admin($login, $password) 
     {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
         if (empty($login) || empty($password)) {
             $error = 'Для создания нового администратора необходимо ввести имя и пароль';
             $this->render('users/add_new_admin', ['error' => $error]);
@@ -70,7 +66,7 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
                 $this->render('users/add_new_admin', ['error' => $error]);
             } else {
                 $add_admin = Admin::add_new_admin($login, $password);
-                self::show_all_admin(); 
+                BaseController::redirect('users', 'all_admin');
             }
         }
     } 
@@ -81,15 +77,13 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
         self::show_all_admin();
     }
 
-    function new_password() 
+    function new_password($login, $password) 
     {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
         if (!empty($password)) {
             $change_pass = Admin::change_password($login,$password);
-            self::show_all_admin();
+            BaseController::redirect('users', 'all_admin');   
         } else {
-            self::show_all_admin();
+            BaseController::redirect('users', 'all_admin');
         }
     }
 
@@ -99,10 +93,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
         self::show_all_admin();
     }
 
-    function confirmDelAdmin() 
+    function confirmDelAdmin($login) 
     {
-        $login = $_POST['login'];
         $confirmDell = Admin::confirmDelAdmin($login);
         self::show_all_admin();
     }
-    }
+}

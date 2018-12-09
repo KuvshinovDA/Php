@@ -32,13 +32,13 @@
     <td><center><?php echo $notanswerQuest['name'] ?></center></td>
     <td><center><?php echo $notanswerQuest['description'] ?></center></td>
     <td><center>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="changeQuest">
         <input type="hidden" name="changeId" value="<?php echo $notanswerQuest['id'] ?>">
         <input type = "submit" name = "view_cat" value = 'Редактировать вопрос '>
     </form>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="delQuestion">
         <input type="hidden" name="delId" value="<?php echo $notanswerQuest['id'] ?>">
@@ -49,7 +49,7 @@
 </tr>
 <?php endforeach; ?>
     </tbody>
-    <form method = "POST">
+    <form method = "GET">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="mainAdmin">
     <input type = "submit" name = "main" value = 'Вернуться на главную страницу'>

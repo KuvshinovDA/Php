@@ -15,13 +15,13 @@
 <header>
 	<h1>FAQ</h1>
 </header>
-</br><form method = "POST">
+</br><form method = "GET">
     <input type = "submit" name = "exit" value = 'Выход'>
 </form></br>
-<form action = "index.php" method = "POST">
+<form action = "index.php" method = "GET">
 	<input type="hidden" name="c" value="cases">
 	<input type="hidden" name="a" value="newQuestion">
-	<input type = "submit" name = "exit" value = 'Задать новый вопрос'>
+	<input type = "submit" name = "quest" value = 'Задать новый вопрос'>
 </form>
 <section class="cd-faq">
 	<ul class="cd-faq-categories">
@@ -36,7 +36,7 @@
 			<li class="cd-faq-title"><h2><?php echo $allQuestions['category'] ?></h2></li>
 			<li>
 			<?php foreach ($allQuestions['questions'] as $questions) :?>
-				<a class="cd-faq-trigger" href="#0"><?php echo $questions['question'] ?>?</a>
+				<a class="cd-faq-trigger" href="#0"><?php echo $questions['question'] ?></a>
 				<div class="cd-faq-content">
 					<p><?php echo $questions['answer'] ?></p>
 				</div> <!-- cd-faq-content -->

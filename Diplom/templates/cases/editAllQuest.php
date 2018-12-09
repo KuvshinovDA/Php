@@ -22,7 +22,7 @@
         <td><h3><center>Вопрос</center></h3></td>
         <td><h3><center>Ответ</center></h3></td>
         <td><h3><center>Скрыт Да/Нет</center></h3></td>
-        <td><h3><center>Категория</center></h3></td>
+        <td><h3><center>Изменить категорию</center></h3></td>
     </tr>
 </thead>
 <tbody>
@@ -36,16 +36,16 @@
 <tr>
 <td><center><?php echo $editQuest['date_added'] ?></center></td>
 <td><center><?php echo $editQuest['author'] ?>
-<form action = "index.php" method = "POST">
+<form action = "index.php" method = "GET">
     <input type="hidden" name="c" value="newUser">
     <input type="hidden" name="a" value="changeAuthor">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="oldAuthor" value="<?php echo $editQuest['author'] ?>">
     <p><input type="submit" name ="edit_auth" value="Изменить имя"></p> 
-    </form>
+    </form> 
 </center></td>
 <td><center><?php echo $editQuest['description'] ?>
-    <form action = "index.php" method = "POST">
+    <form action = "index.php" method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="changeDesc">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
@@ -58,14 +58,14 @@
         echo $answer['description'];
     }
 ?>
-<form action = "index.php" method = "POST">
+<form action = "index.php" method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="editAnswer">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
     <p><input type="submit" name ="edit_answ" value="Ответить"></p>
 </form>
-<form action = "index.php" method = "POST">
+<form action = "index.php" method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="editOldAnswer">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
@@ -92,7 +92,6 @@
 <td><center>
 <form action = "index.php" method = "POST"> 
 <p><select name="categoryEdit">
-<option selected disabled>Выберите категорию</option>
 <?php foreach ($editCategory as $editCat) : ?>
     <option value="<?php echo $editCat['id'] ?>"><?php echo $editCat['name'] ?></option>
 <?php endforeach; ?>
@@ -100,20 +99,20 @@
       <input type="hidden" name="c" value="cases">
       <input type="hidden" name="a" value="changeCategory">
       <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
-      <p><input type="submit" name ="change_cat" value="Поменять категорию"></p>
+      <p><input type="submit" name ="change_cat" value="Изменить"></p>
 </form>
 
 </center></td>
 </tr>
 <?php endforeach; ?>
 </tbody>
-<form method  = "POST">
+<form method  = "GET">
       <input type="hidden" name="c" value="cases">
       <input type="hidden" name="a" value="allCategories">
       <input type = "submit" name = "allCat" value = 'Вернуться к списку категорий'>
 </form></br></br>
 
-<form method  = "POST">
+<form method  = "GET">
       <input type="hidden" name="c" value="cases">
       <input type="hidden" name="a" value="allNotanswerQuest">
       <input type = "submit" name = "notAnswer" value = 'Вернуться к вопросам без ответов'>

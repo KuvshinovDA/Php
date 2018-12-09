@@ -6,7 +6,9 @@
 </head>
 <body>
 <p><h2>Создать новую категорию</h2></p>
-<? echo $error ?>
+
+<? echo @$error ?>
+
 <form action = "index.php" method="POST">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="addCategory">
@@ -16,7 +18,7 @@
     </label>
     <input type="submit" name ="add_admin" value="Подтвердить создание">
 </form></br>
-<form method = "POST">
+<form method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="allCategories">
     <input type = "submit" name = "main" value = 'Отменить'>

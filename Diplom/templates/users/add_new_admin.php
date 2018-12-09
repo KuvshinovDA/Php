@@ -6,7 +6,7 @@
 </head>
 <body>
 <p><h2>Создать нового администратора</h2></p>
-<? echo $error?>
+<?php echo @$error?>
 <form action = "index.php" method="POST">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="add_new_admin">
@@ -18,7 +18,7 @@
     </label>
     <input type="submit" name ="add_admin" value="Подтвердить создание">
 </form></br>
-<form method = "POST">
+<form method = "GET">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="mainAdmin">
     <input type = "submit" name = "main" value = 'Вернуться на главную страницу'>

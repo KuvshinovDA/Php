@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<p><h3>Все вопросы в категории <?php echo $_POST['category'] ?></h3></p>
+<p><h3>Все вопросы в категории <?php echo $_GET['category'] ?></h3></p>
 <table border="1">
 <thead>
     <tr>
@@ -43,13 +43,13 @@
     <td><center><?php echo $done ?></center></td>
     <td><center><?php echo $hide ?></center></td>
     <td><center>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="changeQuest">
         <input type="hidden" name="changeId" value="<?php echo $AllCatQuest['id'] ?>">
         <input type = "submit" name = "change_quest" value = 'Редактировать вопрос '>
     </form>
-    <form style="display: inline-block" method = "POST">
+    <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="delQuestion">
         <input type="hidden" name="delId" value="<?php echo $AllCatQuest['id'] ?>">
@@ -57,9 +57,9 @@
         <input type = "submit" name = "del_quest" value = 'Удалить вопрос'> 
     </form>
     </center></td>
-    </tr>
+    </tr> 
     <?php endforeach; ?>
-    <form method  = "POST">
+    <form method  = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="allCategories">
         <input type = "submit" name = "allCat" value = 'Вернуться к списку категорий'>

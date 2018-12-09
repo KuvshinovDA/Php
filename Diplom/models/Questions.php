@@ -73,6 +73,7 @@ class Questions
 
     static function ShowAnswer($changeId)
     {
+        
         $sth = Di::get()->db()->prepare("SELECT description FROM answers WHERE question_id = :id");
         $sth->bindValue(':id', $changeId);
         $sth->execute();
@@ -81,8 +82,9 @@ class Questions
 
     static function new_author($id, $name) 
     {
+
         $sth = Di::get()->db()->prepare("UPDATE questions SET author= :name WHERE id = :id");
-        $sth->bindValue(':name', $_POST['new_name']);
+        $sth->bindValue(':name', $name);
         $sth->bindValue(':id', $id);
         $sth->execute();
         return $sth->fetch();
@@ -135,7 +137,7 @@ class Questions
 
     static function NewAnswer($id, $answer)
     {
-        $sth = Di::get()->db()->prepare("INSERT INTO answers (description, question_id) 
+        $sth = Di::get()->db()->prepare("INSERT INTO answers ( description, question_id) 
         VALUES (:description, :question_id)");
         $sth->bindValue(':question_id', $id);
         $sth->bindValue(':description', $answer);
@@ -159,6 +161,14 @@ class Questions
         $sth->bindValue(':description', $answer);
         $sth->execute();
         return $sth->fetchAll();
+    }
+
+    static function SameAnswer($id)
+    {
+        $sth = Di::get()->db()->prepare("SELECT `id` FROM `answers` WHERE `question_id` = :question_id");
+        $sth->bindValue(':question_id', $id);
+        $sth->execute();
+        return $sth->fetch();
     }
 
     static function NewUserQuestion($name, $email, $question, $category)

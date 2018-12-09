@@ -5,7 +5,7 @@
 </head>
 <body>
     <p><h3>Для авторизации введите имя и пароль</h3></p>
-    <? echo $error?>
+    <? echo @$error?>
     <form action = "index.php" method="POST">
     <input type="hidden" name="c" value="users">
     <input type="hidden" name="a" value="auth">
@@ -19,7 +19,7 @@
     </form>
     <p><h3>Или войдите как гость</h3></p>
 
-    <form action = "index.php" method="POST">
+    <form action = "index.php" method="GET">
         <input type="hidden" name="c" value="users">
         <input type="hidden" name="a" value="user">
         <input type="submit" name ="submit" value="Войти как гость">
