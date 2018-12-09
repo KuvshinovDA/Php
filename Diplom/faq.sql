@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 05 2018 г., 22:10
+-- Время создания: Дек 09 2018 г., 14:02
 -- Версия сервера: 5.6.41
 -- Версия PHP: 5.5.38
 
@@ -59,11 +59,12 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `description`, `question_id`, `date_added`) VALUES
-(11, 'Вот так', 5, '2018-12-04 10:52:14'),
-(12, 'Туда', 2, '2018-12-04 12:13:59'),
-(13, 'Так надо', 3, '2018-12-04 12:17:43'),
-(14, 'Всегда', 6, '2018-12-05 11:11:01'),
-(15, 'Скоро', 7, '2018-12-05 11:41:30');
+(22, 'Потому', 21, '2018-12-09 06:09:55'),
+(23, 'Так не надо', 22, '2018-12-09 06:10:27'),
+(24, '123', 23, '2018-12-09 06:10:43'),
+(25, 'Не очень', 24, '2018-12-09 06:11:04'),
+(26, 'Все хорошо', 25, '2018-12-09 06:13:10'),
+(27, 'Сегодня', 26, '2018-12-09 07:43:46');
 
 -- --------------------------------------------------------
 
@@ -82,9 +83,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `author`) VALUES
-(2, 'phones', 'admin'),
 (3, 'cars', 'admin'),
-(5, 'books', 'admin');
+(5, 'books', 'admin'),
+(10, 'php', 'admin'),
+(11, 'dols', 'admin');
 
 -- --------------------------------------------------------
 
@@ -108,12 +110,12 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `category_id`, `author`, `email`, `description`, `is_done`, `hide`, `date_added`) VALUES
-(2, 2, 'Masha', '', 'Куда', 1, 1, '2018-12-03 15:26:11'),
-(3, 2, 'Sasha', '', 'Зачем', 1, 1, '2018-12-03 15:27:03'),
-(5, 3, 'Петя', '', 'Почему', 1, 0, '2018-12-03 15:28:28'),
-(6, 2, 'Дима', 'йцу@nd.ru', 'qwer', 1, 1, '2018-12-04 19:46:16'),
-(7, 5, 'Дима', 'фыв@пропо', 'Когда уже', 1, 1, '2018-12-05 11:17:17'),
-(8, 5, 'Дима', 'йцу@nd.ru', 'Можно ли', 0, 0, '2018-12-05 11:32:08');
+(21, 3, 'Дима', 'йцу@nd.ru', 'Почему', 1, 1, '2018-12-09 06:02:20'),
+(22, 5, 'Маша', 'фыв@пропо', 'Зачем', 1, 1, '2018-12-09 06:03:03'),
+(23, 10, 'Петя', 'ывва@ароапо', 'Когда', 1, 1, '2018-12-09 06:03:59'),
+(24, 11, 'Вяня', 'ывпвар@шодод', 'Долго еще', 1, 1, '2018-12-09 06:04:47'),
+(25, 3, 'Дима', 'йцу@nd.ru', 'Что потом', 1, 1, '2018-12-09 06:12:35'),
+(26, 3, 'Дима', 'йцу@nd.ru', 'Когда', 1, 1, '2018-12-09 07:43:21');
 
 --
 -- Индексы сохранённых таблиц
@@ -157,19 +159,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
