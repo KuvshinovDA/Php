@@ -2,7 +2,7 @@
 
 class Admin 
 {
-    static function find_by_login($login, $password) 
+    static function findByLogin($login, $password) 
     {
         $sth = Di::get()->db()->prepare("SELECT id FROM admin WHERE login = :login AND password = :password");
         $sth->bindValue(':login', $login);
@@ -11,14 +11,14 @@ class Admin
         return $sth->fetch();
     }
 
-    static function show_all_admin() 
+    static function showAllAdmin() 
     {
         $sth = Di::get()->db()->prepare("SELECT * FROM admin");
         $sth->execute();
         return $sth->fetchAll();
     }
 
-    static function check_admin_name($login) 
+    static function checkAdminName($login) 
     {
         $sth = Di::get()->db()->prepare("SELECT id FROM admin WHERE login = :login");
         $sth->bindValue(':login', $login);
@@ -26,7 +26,7 @@ class Admin
         return $sth->fetch();
     }
 
-    static function add_new_admin($login, $password) 
+    static function addNewAdmin($login, $password) 
     {
         $sth = Di::get()->db()->prepare("INSERT INTO admin (login, password)
         VALUES (:login,:password)");
@@ -35,7 +35,7 @@ class Admin
         return $sth->execute();
     }
 
-    static function change_password ($login,$password) 
+    static function changePassword ($login,$password) 
     {
         $sth = Di::get()->db()->prepare("UPDATE admin SET password = :password WHERE login = :login");
         $sth->bindValue(':login', $login);

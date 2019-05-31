@@ -13,7 +13,7 @@
 <label>
     <p><textarea rows="4" cols="45" name="description"></textarea></p>
 </label>
-    <input type="submit" name ="edit_quest" value="Изменить вопрос">
+    <input type="submit" name ="editQuest" value="Изменить вопрос">
 </form>
 </body>
 </html> 

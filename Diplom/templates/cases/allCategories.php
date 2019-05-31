@@ -17,7 +17,7 @@
 <form method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="addNewCategory">
-    <input type = "submit" name = "add_cat" value = 'Создать новую категорию'>
+    <input type = "submit" name = "addCat" value = 'Создать новую категорию'>
 </form></br>
 <form method = "GET">
     <input type="hidden" name="c" value="users">

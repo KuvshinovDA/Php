@@ -17,23 +17,23 @@ if ($controller == 'users') {
     if ($action == 'auth') {
         $admins_controller->registration($_POST['login'], $_POST['password']);
     } elseif ($action == 'user') {
-        $admins_controller->go_to();
+        $admins_controller->goUsers();
     } elseif ($action == 'mainAdmin') {
         $admins_controller->adminPage();
-    } elseif ($action == 'all_admin') {
-        $admins_controller->show_all_admin();
-    } elseif ($action == 'add_admin') {
-        $admins_controller->add_admin_page();
-    } elseif ($action == 'add_new_admin') {
-        $admins_controller->add_new_admin($_POST['login'], $_POST['password']);
-    } elseif ($action == 'change_password') {
-        $admins_controller->change_password();
-    } elseif ($action == 'new_pass') {
-        $admins_controller->new_password($_POST['login'], $_POST['password']);
+    } elseif ($action == 'allAdmin') {
+        $admins_controller->showAllAdmin();
+    } elseif ($action == 'addAdmin') {
+        $admins_controller->addAdminPage();
+    } elseif ($action == 'addNewAdmin') {
+        $admins_controller->addNewAdmin($_POST['login'], $_POST['password']);
+    } elseif ($action == 'changePassword') {
+        $admins_controller->changePassword();
+    } elseif ($action == 'newPass') {
+        $admins_controller->newPassword($_POST['login'], $_POST['password']);
     } elseif ($action == 'delAdmin') {
         $admins_controller->delAdmin();
     } elseif ($action == 'cancelDelAdmin') {
-        $admins_controller->show_all_admin();
+        $admins_controller->showAllAdmin();   
     } elseif ($action == 'confirmDelAdmin') {
         $admins_controller->confirmDelAdmin($_GET['login']);
     } else {
@@ -46,51 +46,49 @@ include 'controllers/CasesController.php';
 $casesController = new CasesController();
 
     if ($action == 'allCategories') {
-        $casesController->ShowAllCategories();
+        $casesController->showAllCategories();
     } elseif ($action == 'addNewCategory') {
-        $casesController->AddNewCategory();
+        $casesController->addNewCategory();
     } elseif ($action == 'addCategory') {
-        $casesController->FindCategory($_POST['newCategory'], $_POST['login']);
+        $casesController->findCategory($_POST['newCategory'], $_POST['login']);
     } elseif ($action == 'delCategory') {
-        $casesController->DelCategory();
+        $casesController->delCategory();
     } elseif ($action == 'confirmDelCategory') {
-        $casesController->ConfirmDelCategory($_GET['category']);
+        $casesController->confirmDelCategory($_GET['category']);
     } elseif ($action == 'openCategory') {
-        $casesController->OpenCategory($_GET['catId']);
+        $casesController->openCategory($_GET['catId']);
     } elseif ($action == 'delQuestion') {
-        $casesController->DelQuestion();
+        $casesController->delQuestion();
     } elseif ($action == 'confirmDelQuestion') {
-        $casesController->ConfirmDelQuestion($_GET['catId']);
-    } elseif ($action == 'openQuestion') {
-        $casesController->OpenQuestion();
+        $casesController->confirmDelQuestion($_GET['catId']); 
     } elseif ($action == 'changeQuest') {
-        $casesController->ChangeQuest($_GET['changeId']);
+        $casesController->changeQuest($_GET['changeId']);
     } elseif ($action == 'confirmChangeAuthor') {
-        $casesController->ConfirmChangeAuthor($_POST['changeId'], $_POST['new_name']);
+        $casesController->confirmChangeAuthor($_POST['changeId'], $_POST['new_name']);
     } elseif ($action == 'changeDesc') {
-        $casesController->ChangeDesc(); 
+        $casesController->changeDesc(); 
     } elseif ($action == 'confirmChangeDescription') {
-        $casesController->ConfirmChangeDescription($_POST['changeId'], $_POST['description']); 
+        $casesController->confirmChangeDescription($_POST['changeId'], $_POST['description']); 
     } elseif ($action == 'publish') {
-        $casesController->Publish($_POST['changeId']); 
+        $casesController->publish($_POST['changeId']); 
     } elseif ($action == 'hide') {
-        $casesController->Hide($_POST['changeId']); 
+        $casesController->hide($_POST['changeId']); 
     } elseif ($action == 'changeCategory') {
-        $casesController->ChangeCategory($_POST['changeId'], $_POST['categoryEdit']); 
+        $casesController->changeCategory($_POST['changeId'], $_POST['categoryEdit']); 
     } elseif ($action == 'editAnswer') {
-        $casesController->EditAnswer($_GET['changeId']); 
+        $casesController->editAnswer($_GET['changeId']); 
     } elseif ($action == 'allNotanswerQuest') {
-        $casesController->AllNotanswerQuest(); 
+        $casesController->allNotanswerQuest(); 
     } elseif ($action == 'newAnswer') {
-        $casesController->NewAnswer($_POST['changeId'], $_POST['answer']); 
+        $casesController->newAnswer($_POST['changeId'], $_POST['answer']); 
     } elseif ($action == 'editOldAnswer') {
-        $casesController->EditOldAnswer(); 
+        $casesController->editOldAnswer(); 
     } elseif ($action == 'confirmChangeAnswer') {
-        $casesController->ConfirmChangeAnswer($_POST['changeId'], $_POST['answer']); 
+        $casesController->confirmChangeAnswer($_POST['changeId'], $_POST['answer']); 
     } elseif ($action == 'newQuestion') {
-        $casesController->NewQuestion(); 
+        $casesController->newQuestion(); 
     } elseif ($action == 'newUserQuestion') {
-        $casesController->NewUserQuestion(); 
+        $casesController->newUserQuestion(); 
     }  
 }
 
@@ -103,4 +101,6 @@ $casesController = new CasesController();
     } 
         
 }
+
+
     

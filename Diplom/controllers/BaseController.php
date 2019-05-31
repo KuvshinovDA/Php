@@ -1,6 +1,7 @@
 <?php
 
-function _d($str){
+function _d($str)
+{
     echo '<pre>';
     print_r($str);
     echo '<pre>';
@@ -10,25 +11,25 @@ function _d($str){
 class BaseController 
 {
     function redirect($controller, $action = '') 
-        {
-            $url = "?c=$controller";
-            if($action){
-                $url .= "&a=$action";
-            }
-
-            header("Location: $url");
+    {
+        $url = "?c=$controller";
+        if($action) {
+            $url .= "&a=$action";
         }
+
+        header("Location: $url");
+    }
 
     public function render($template, $params = [])
-        {
-            $fileTemplate = 'templates/'.$template.".php";
-            if (is_file($fileTemplate)) {
-                ob_start();
-                if (count($params) > 0) {
-                    extract($params);
-                }
-                include $fileTemplate;
-                echo ob_get_clean();
+    {
+        $fileTemplate = 'templates/'.$template.".php";
+        if (is_file($fileTemplate)) {
+            ob_start();
+            if (count($params) > 0) {
+                extract($params);
             }
+            include $fileTemplate;
+            echo ob_get_clean();
         }
+    }
 }

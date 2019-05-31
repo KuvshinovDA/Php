@@ -16,8 +16,8 @@
 <p><h3>Все администраторы</h3></p>
 <form method = "GET">
     <input type="hidden" name="c" value="users">
-    <input type="hidden" name="a" value="add_admin">
-    <input type = "submit" name = "add_admin" value = 'Создать нового администратора'>
+    <input type="hidden" name="a" value="addAdmin">
+    <input type = "submit" name = "addAdmin" value = 'Создать нового администратора'>
 </form></br>
 <form method = "GET">
     <input type="hidden" name="c" value="users">
@@ -45,9 +45,9 @@ foreach ($show_admin as $adm) { ?>
     <td><center>
     <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="users">
-        <input type="hidden" name="a" value="change_password">
+        <input type="hidden" name="a" value="changePassword">
         <input type="hidden" name="login" value="<?php echo $adm['login'] ?>">
-        <input type = "submit" name = "change_pass" value = 'Изменить пароль'>
+        <input type = "submit" name = "changePass" value = 'Изменить пароль'>
     </form>
     <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="users">

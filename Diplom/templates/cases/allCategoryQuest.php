@@ -47,14 +47,14 @@
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="changeQuest">
         <input type="hidden" name="changeId" value="<?php echo $AllCatQuest['id'] ?>">
-        <input type = "submit" name = "change_quest" value = 'Редактировать вопрос '>
+        <input type = "submit" name = "changeQuest" value = 'Редактировать вопрос '>
     </form>
     <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="delQuestion">
         <input type="hidden" name="delId" value="<?php echo $AllCatQuest['id'] ?>">
         <input type="hidden" name="description" value="<?php echo $AllCatQuest['description'] ?>">
-        <input type = "submit" name = "del_quest" value = 'Удалить вопрос'> 
+        <input type = "submit" name = "delQuest" value = 'Удалить вопрос'> 
     </form>
     </center></td>
     </tr> 

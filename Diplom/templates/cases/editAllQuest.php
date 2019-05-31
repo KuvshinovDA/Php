@@ -21,16 +21,16 @@
         <td><h3><center>Автор</center></h3></td>
         <td><h3><center>Вопрос</center></h3></td>
         <td><h3><center>Ответ</center></h3></td>
-        <td><h3><center>Скрыт Да/Нет</center></h3></td>
+        <td><h3><center>Опубликован/Скрыт</center></h3></td>
         <td><h3><center>Изменить категорию</center></h3></td>
     </tr>
 </thead>
 <tbody>
 <?php foreach ($editQuestion as $editQuest) :
     if ($editQuest['hide'] == 0) {
-        $hide = 'Скрыто';
+        $hide = 'Скрыт';
     } else {
-        $hide = 'Опубликованно';
+        $hide = 'Опубликован';
     }  
   ?>
 <tr>
@@ -41,7 +41,7 @@
     <input type="hidden" name="a" value="changeAuthor">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="oldAuthor" value="<?php echo $editQuest['author'] ?>">
-    <p><input type="submit" name ="edit_auth" value="Изменить имя"></p> 
+    <p><input type="submit" name ="editAuth" value="Изменить имя"></p> 
     </form> 
 </center></td>
 <td><center><?php echo $editQuest['description'] ?>
@@ -50,7 +50,7 @@
     <input type="hidden" name="a" value="changeDesc">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="changeDesc" value="<?php echo $editQuest['description'] ?>">
-    <p><input type="submit" name ="edit_quest" value="Редактировать"></p>
+    <p><input type="submit" name ="editQuest" value="Редактировать"></p>
     </form>
 </center></td>
 <td><center><?php foreach ($showAnswer as $answer) 
@@ -63,14 +63,14 @@
     <input type="hidden" name="a" value="editAnswer">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
-    <p><input type="submit" name ="edit_answ" value="Ответить"></p>
+    <p><input type="submit" name ="editAnsw" value="Ответить"></p>
 </form>
 <form action = "index.php" method = "GET">
     <input type="hidden" name="c" value="cases">
     <input type="hidden" name="a" value="editOldAnswer">
     <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
     <input type="hidden" name="description" value="<?php echo $editQuest['description'] ?>">
-    <p><input type="submit" name ="change_answ" value="Редактировать"></p>
+    <p><input type="submit" name ="changeAnsw" value="Редактировать"></p>
 </form>
 
 </center></td>
@@ -99,7 +99,7 @@
       <input type="hidden" name="c" value="cases">
       <input type="hidden" name="a" value="changeCategory">
       <input type="hidden" name="changeId" value="<?php echo $editQuest['id'] ?>">
-      <p><input type="submit" name ="change_cat" value="Изменить"></p>
+      <p><input type="submit" name ="changeCat" value="Изменить"></p>
 </form>
 
 </center></td>

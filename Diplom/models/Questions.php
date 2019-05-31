@@ -13,7 +13,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function find_category($name) 
+    static function findCategory($name) 
     {
         $sth = Di::get()->db()->prepare("SELECT id FROM categories WHERE name = :name");
         $sth->bindValue(':name', $name);
@@ -21,7 +21,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function add_category($login, $name) 
+    static function addCategory($login, $name) 
     {
         $sth = Di::get()->db()->prepare("INSERT INTO categories (name, author) 
         VALUES (:name, :login)");
@@ -31,14 +31,14 @@ class Questions
         return $sth->fetch();
     }
 
-    static function delete_category($category)
+    static function deleteCategory($category)
     {
         $sth = Di::get()->db()->prepare("DELETE FROM categories WHERE name = :category");
         $sth->bindValue(':category', $category);
         return $sth->execute();
     }
 
-    static function show_cat_questions($catId)
+    static function showCatQuestions($catId)
     {
         $sth = Di::get()->db()->prepare("SELECT id, category_id, 
         description, is_done, hide, date_added 
@@ -48,14 +48,14 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function delete_questions($id)
+    static function deleteQuestions($id)
     {
         $sth = Di::get()->db()->prepare("DELETE FROM questions WHERE id = :id");
         $sth->bindValue(':id', $id);
         return $sth->execute();
     }
 
-    static function edit_question($changeId)
+    static function editQuestion($changeId)
     {
         $sth = Di::get()->db()->prepare("SELECT id, author, description, is_done, hide, date_added 
         FROM questions WHERE id = :id" );
@@ -64,14 +64,14 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function edit_cat() 
+    static function editCat() 
     {
         $sth = Di::get()->db()->prepare("SELECT id, name FROM categories" );
         $sth->execute();
         return $sth->fetchAll();
     }
 
-    static function ShowAnswer($changeId)
+    static function showAnswer($changeId)
     {
         
         $sth = Di::get()->db()->prepare("SELECT description FROM answers WHERE question_id = :id");
@@ -80,7 +80,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function new_author($id, $name) 
+    static function newAuthor($id, $name) 
     {
 
         $sth = Di::get()->db()->prepare("UPDATE questions SET author= :name WHERE id = :id");
@@ -90,7 +90,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function new_description($id, $description) 
+    static function newDescription($id, $description) 
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET description = :description WHERE id = :id");
         $sth->bindValue(':description', $_POST['description']);
@@ -99,7 +99,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function Publish($id)
+    static function publish($id)
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET hide = 1 WHERE id = :id");
         $sth->bindValue(':id', $id);
@@ -107,7 +107,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function Hide($id)
+    static function hide($id)
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET hide = 0 WHERE id = :id");
         $sth->bindValue(':id', $id);
@@ -115,7 +115,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function ChangeCategory($id, $changeCat)
+    static function changeCategory($id, $changeCat)
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET category_id = :catId WHERE id = :id");
         $sth->bindValue(':id', $id);
@@ -124,7 +124,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function AllNotanswerQuest()
+    static function allNotanswerQuest()
     {
         $sth = Di::get()->db()->prepare("SELECT questions.id, questions.author, 
         questions.description, questions.date_added, categories.name 
@@ -135,7 +135,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function NewAnswer($id, $answer)
+    static function newAnswer($id, $answer)
     {
         $sth = Di::get()->db()->prepare("INSERT INTO answers ( description, question_id) 
         VALUES (:description, :question_id)");
@@ -145,7 +145,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function ChangeIsDone($id)
+    static function changeIsDone($id)
     {
         $sth = Di::get()->db()->prepare("UPDATE questions SET is_done = 1 WHERE id = :id");
         $sth->bindValue(':id', $id);
@@ -153,7 +153,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function ChangeAnswer($id, $answer)
+    static function changeAnswer($id, $answer)
     {
         $sth = Di::get()->db()->prepare("UPDATE answers SET description = :description 
         WHERE question_id = :question_id");
@@ -163,7 +163,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function SameAnswer($id)
+    static function sameAnswer($id)
     {
         $sth = Di::get()->db()->prepare("SELECT `id` FROM `answers` WHERE `question_id` = :question_id");
         $sth->bindValue(':question_id', $id);
@@ -171,7 +171,7 @@ class Questions
         return $sth->fetch();
     }
 
-    static function NewUserQuestion($name, $email, $question, $category)
+    static function newUserQuestion($name, $email, $question, $category)
     {
         $sth = Di::get()->db()->prepare("INSERT INTO questions (category_id, author, email, description)
         VALUES (:category, :name, :email, :question)");
@@ -183,7 +183,7 @@ class Questions
         return $sth->fetchAll();
     }
 
-    static function AllUserQuestions()
+    static function allUserQuestions()
     {
         $sth = Di::get()->db()->prepare("SELECT categories.id as id, categories.name as categories, 
         questions.description as questions, answers.description as answers 

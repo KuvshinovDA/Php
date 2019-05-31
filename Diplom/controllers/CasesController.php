@@ -10,159 +10,169 @@ class CasesController extends BaseController
         $this->render('cases/index');
     }
 
-    function ShowAllCategories() 
+    function showAllCategories() 
     {
         $showAllategories = Questions::showAllCategories();
-        $this->render('cases/allCategories',['showAllategories' => $showAllategories]);
+        $this->render('cases/AllCategories',['showAllategories' => $showAllategories]);
     }
 
-    function AddNewCategory() 
+    function addNewCategory() 
     {
         $admLogin = $_SESSION['login'];
-        $this->render('cases/addNewCategory', ['admLogin' => $admLogin]);
+        $this->render('cases/AddNewCategory', ['admLogin' => $admLogin]);
         self::ShowAllCategories();
     }
 
-    function FindCategory($name, $login)
+    function findCategory($name, $login)
     {
-        $sameCategory = Questions::find_category($name);
+        $sameCategory = Questions::findCategory($name);
         if ($sameCategory) {
             $error = 'Такая категория уже существует!';
-            $this->render('cases/addNewCategory', ['error' => $error]);
-            self::ShowAllCategories();
+            $this->render('cases/AddNewCategory', ['error' => $error]);
+            self::showAllCategories();
             return;
+        } elseif (empty($name)) {
+            BaseController::redirect('cases','allCategories');
         } else {
-            $addCategory = Questions::add_category($login, $name);
+            $addCategory = Questions::addCategory($login, $name);
             BaseController::redirect('cases','allCategories');
         }
     }
 
-    function DelCategory()
+    function delCategory()
     {
-        $this->render('cases/delCategory');
-        self::ShowAllCategories();
+        $this->render('cases/DelCategory');
+        self::showAllCategories();
     }
 
-    function ConfirmDelCategory($category)
+    function confirmDelCategory($category)
     {
-        $confirmDelCat = Questions::delete_category($category);
-        self::ShowAllCategories();
+        $confirmDelCat = Questions::deleteCategory($category);
+        self::showAllCategories();
     }
 
-    function OpenCategory($catId)
+    function openCategory($catId)
     {
-        $showCatQuest = Questions::show_cat_questions($catId);
-        $this->render('cases/allCategoryQuest', ['showCatQuest' => $showCatQuest]);
+        $showCatQuest = Questions::showCatQuestions($catId);
+        $this->render('cases/AllCategoryQuest', ['showCatQuest' => $showCatQuest]);
     }
 
-    function DelQuestion()
+    function delQuestion()
     {
-        $this->render('cases/delQuestion');
+        $this->render('cases/DelQuestion');
     }
 
-    function ConfirmDelQuestion($id)
+    function confirmDelQuestion($id)
     {
-        $delQuestion = Questions::delete_questions($id);
+        $delQuestion = Questions::deleteQuestions($id);
         BaseController::redirect('cases','allCategories');
     }
 
-    function ChangeQuest($changeId)
+    function changeQuest($changeId)
     {
-        $editQuestion = Questions::edit_question($changeId);
-        $editCategory = Questions::edit_cat();
-        $showAnswer = Questions::ShowAnswer($changeId);
-        $this->render('cases/editAllQuest', ['editQuestion' => $editQuestion,
+        $editQuestion = Questions::editQuestion($changeId);
+        $editCategory = Questions::editCat();
+        $showAnswer = Questions::showAnswer($changeId);
+        $this->render('cases/EditAllQuest', ['editQuestion' => $editQuestion,
         'editCategory' => $editCategory, 'showAnswer' => $showAnswer]);
     }
 
-    function ConfirmChangeAuthor($id, $name)
+    function confirmChangeAuthor($id, $name)
     {
         if (empty($name)) {
             BaseController::redirect('cases', "changeQuest&changeId= $id");
         } else {
-        $changeAuth = Questions::new_author($id, $name);
-        BaseController::redirect('cases', "changeQuest&changeId= $id");
+            $changeAuth = Questions::newAuthor($id, $name);
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
         }
     }
 
-    function ChangeDesc()
+    function changeDesc()
     {
-        $this->render('cases/editQuest');
+        $this->render('cases/EditQuest');
     }
 
-    function ConfirmChangeDescription($id, $name)
+    function confirmChangeDescription($id, $name)
     {
-        $changeDesc = Questions::new_description($id, $name);
+        if (empty($name)) {
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        } else { 
+            $changeDesc = Questions::newDescription($id, $name);
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        }
+    }
+
+    function publish($id)
+    {
+        $publish = Questions::publish($id);
         BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
-    function Publish($id)
+    function hide($id)
     {
-        $publish = Questions::Publish($id);
+        $Hide = Questions::hide($id);
         BaseController::redirect('cases', "changeQuest&changeId= $id");
     }
 
-    function Hide($id)
-    {
-        $Hide = Questions::Hide($id);
-        BaseController::redirect('cases', "changeQuest&changeId= $id");
-    }
-
-    function ChangeCategory($id, $changeCat)
+    function changeCategory($id, $changeCat)
     {
         if (empty($changeCat)) {
             BaseController::redirect('cases', "changeQuest&changeId= $id");
             var_dump ($id);
         } else {
-        $ChangeCategory = Questions::ChangeCategory($id, $changeCat);
-        BaseController::redirect('cases', "changeQuest&changeId= $id");
+            $ChangeCategory = Questions::changeCategory($id, $changeCat);
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
         }
     }
 
-    function EditAnswer($id)
+    function editAnswer($id)
     {
-        $sameAnswer = Questions::SameAnswer($id);
+        $sameAnswer = Questions::sameAnswer($id);
         if ($sameAnswer) {
             BaseController::redirect('cases', "changeQuest&changeId= $id");
         }
-        $this->render('cases/editAnswer');
+        $this->render('cases/EditAnswer');
     }
 
-    function AllNotanswerQuest() 
+    function allNotanswerQuest() 
     {
-         $allNotanswerQuest = Questions::AllNotanswerQuest();
-        $this->render('cases/allNotanswerQuest', ['allNotanswerQuest' => $allNotanswerQuest]);
+        $allNotanswerQuest = Questions::allNotanswerQuest();
+        $this->render('cases/AllNotanswerQuest', ['allNotanswerQuest' => $allNotanswerQuest]);
     }
 
-    function NewAnswer($changeId, $answer) 
+    function newAnswer($changeId, $answer) 
     {
         if(empty($answer)) {
             BaseController::redirect('cases', "changeQuest&changeId= $changeId");
         } else {
-        $newAnswer = Questions::NewAnswer($changeId, $answer);
-        $ChangeIsDone = Questions::ChangeIsDone($changeId);
-        $this->render('cases/confirmAnswer');
+            $newAnswer = Questions::newAnswer($changeId, $answer);
+            $ChangeIsDone = Questions::changeIsDone($changeId);
+            $this->render('cases/ConfirmAnswer');
         }
     }
 
-    function EditOldAnswer()
+    function editOldAnswer()
     {
-        $this->render('cases/changeAnswer');
+        $this->render('cases/ChangeAnswer');
     }
 
-    function ConfirmChangeAnswer($id, $answer) 
+    function confirmChangeAnswer($id, $answer)  
     {
-        $chahgeAnswer = Questions::ChangeAnswer($id, $answer);
-        BaseController::redirect('cases', "changeQuest&changeId= $id");
+        if (empty($answer)) {
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        } else {
+            $chahgeAnswer = Questions::changeAnswer($id, $answer);
+            BaseController::redirect('cases', "changeQuest&changeId= $id");
+        }
     }
 
-    function NewQuestion() 
+    function newQuestion() 
     {
-        $editCategory = Questions::edit_cat();
-        $this->render('cases/newQuestion', ['editCategory' => $editCategory]);
+        $editCategory = Questions::editCat();
+        $this->render('cases/NewQuestion', ['editCategory' => $editCategory]);
     }
 
-    function NewUserQuestion() 
+    function newUserQuestion() 
     {
         $name = $_POST['userName'];
         $email = $_POST['userEmail'];
@@ -170,13 +180,13 @@ class CasesController extends BaseController
         $category = $_POST['category'];
         if (empty($name) || empty($email) || empty($question) || empty($category)) {
             $error = 'Введите все данные для создания нового вопроса';
-            $editCategory = Questions::edit_cat();
-            $this->render('cases/newQuestion', ['error' => $error, 'editCategory' => $editCategory]);
+            $editCategory = Questions::editCat();
+            $this->render('cases/NewQuestion', ['error' => $error, 'editCategory' => $editCategory]);
             return;
         } else { 
-            $chahgeAnswer = Questions::NewUserQuestion($name, $email, $question, $category);
-            $editCategory = Questions::edit_cat();
-            $allUserQuestions = Questions::AllUserQuestions();
+            $chahgeAnswer = Questions::newUserQuestion($name, $email, $question, $category);
+            $editCategory = Questions::editCat();
+            $allUserQuestions = Questions::allUserQuestions();
             BaseController::redirect('users','user');
         }
     }

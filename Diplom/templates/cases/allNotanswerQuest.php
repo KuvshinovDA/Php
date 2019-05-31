@@ -36,14 +36,14 @@
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="changeQuest">
         <input type="hidden" name="changeId" value="<?php echo $notanswerQuest['id'] ?>">
-        <input type = "submit" name = "view_cat" value = 'Редактировать вопрос '>
+        <input type = "submit" name = "viewCat" value = 'Редактировать вопрос '>
     </form>
     <form style="display: inline-block" method = "GET">
         <input type="hidden" name="c" value="cases">
         <input type="hidden" name="a" value="delQuestion">
         <input type="hidden" name="delId" value="<?php echo $notanswerQuest['id'] ?>">
         <input type="hidden" name="description" value="<?php echo $notanswerQuest['description'] ?>">
-        <input type = "submit" name = "dell_quest" value = 'Удалить вопрос'> 
+        <input type = "submit" name = "dellQuest" value = 'Удалить вопрос'> 
     </form>
     </center></td>
 </tr>

@@ -1,11 +1,11 @@
 <?php
 session_start();
 include 'BaseController.php';
-include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/admin.php';
+include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Admin.php';
 include $_SERVER['DOCUMENT_ROOT'].'/Diplom/models/Questions.php';
 
 class AdminsController extends BaseController 
-    {
+{
     function index() 
     {
         $this->render('users/index');
@@ -13,7 +13,7 @@ class AdminsController extends BaseController
 
     function registration($login, $password) 
     {
-        $admin = Admin::find_by_login($login, $password);
+        $admin = Admin::findByLogin($login, $password);
         if (empty($login) || empty($password)) {
             $error = 'Для входа введите имя и пароль';
             $this->render('users/index', ['error' => $error]);
@@ -28,10 +28,10 @@ class AdminsController extends BaseController
         }
     }
 
-    function go_to() 
+    function goUsers() 
     {
-        $editCategory = Questions::edit_cat();
-        $allUserQuestions = Questions::AllUserQuestions();
+        $editCategory = Questions::editCat();
+        $allUserQuestions = Questions::allUserQuestions();
         $this->render('cases/index', ['editCategory' => $editCategory, 
         'allUserQuestions' => $allUserQuestions]);
     }
@@ -41,61 +41,62 @@ class AdminsController extends BaseController
         $this->render('users/AdminPage');
     }
 
-    function show_all_admin() 
+    function showAllAdmin() 
     {
-        $show_admin = Admin::show_all_admin();
+        $show_admin = Admin::showAllAdmin();
         if ($show_admin) {
             $this->render('users/AllAdmin', ['show_admin' => $show_admin]);
         }
     }
 
-    function add_admin_page() 
+    function addAdminPage() 
     {
-        $this->render('users/add_new_admin');
+        $this->render('users/AddNewAdmin');
     }
 
-    function add_new_admin($login, $password) 
+    function addNewAdmin($login, $password) 
     {
         if (empty($login) || empty($password)) {
             $error = 'Для создания нового администратора необходимо ввести имя и пароль';
-            $this->render('users/add_new_admin', ['error' => $error]);
+            $this->render('users/AddNewAdmin', ['error' => $error]);
         } elseif (!empty($login) && !empty($password)) {
-            $check_admin_name = Admin::check_admin_name($login);
+            $check_admin_name = Admin::checkAdminName($login);
             if ($check_admin_name) {
                 $error = 'Администратор с таким именем уже существует';
-                $this->render('users/add_new_admin', ['error' => $error]);
+                $this->render('users/AddNewAdmin', ['error' => $error]);
             } else {
-                $add_admin = Admin::add_new_admin($login, $password);
-                BaseController::redirect('users', 'all_admin');
+                $add_admin = Admin::addNewAdmin($login, $password);
+                BaseController::redirect('users', 'allAdmin');
             }
         }
     } 
 
-    function change_password() 
+    function changePassword() 
     {
-        $this->render('users/change_password');
-        self::show_all_admin();
+        $this->render('users/ChangePassword');
+        self::showAllAdmin();
     }
 
-    function new_password($login, $password) 
+    function newPassword($login, $password) 
     {
         if (!empty($password)) {
-            $change_pass = Admin::change_password($login,$password);
-            BaseController::redirect('users', 'all_admin');   
+            $change_pass = Admin::changePassword($login,$password);
+            BaseController::redirect('users', 'allAdmin');   
         } else {
-            BaseController::redirect('users', 'all_admin');
+            BaseController::redirect('users', 'allAdmin');
         }
     }
 
     function delAdmin () 
     {
-        $this->render('users/delAdmin');
-        self::show_all_admin();
+        $this->render('users/DelAdmin');
+        self::showAllAdmin();
     }
 
     function confirmDelAdmin($login) 
     {
         $confirmDell = Admin::confirmDelAdmin($login);
-        self::show_all_admin();
+        self::showAllAdmin();
     }
 }
+

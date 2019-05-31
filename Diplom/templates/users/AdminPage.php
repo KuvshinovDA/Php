@@ -6,10 +6,10 @@
 </head>
 <body>
 <p><h2>Страница администратора</h2></p>
-<form action = "index.php" name = "all_adm" method="GET">
+<form action = "index.php" name = "allAdm" method="GET">
     <input type="hidden" name="c" value="users">
-    <input type="hidden" name="a" value="all_admin">
-    <p><input type="submit" name="all_admin" value = "Все администраторы"></p>
+    <input type="hidden" name="a" value="allAdmin">
+    <p><input type="submit" name="allAdmin" value = "Все администраторы"></p>
 </form>
 <form action = "index.php" method="GET">
     <input type="hidden" name="c" value="cases">

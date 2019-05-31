@@ -6,27 +6,27 @@ ini_set('error_reporting',E_ALL);
 
 class Di
 {
-  static $di = null;
-  public static function get()
-  {
-    if (! self::$di) {
+    static $di = null;
+    public static function get()
+    {
+        if (! self::$di) {
         self::$di = new Di();
     }
     return self::$di;
-  }
+    }
   
   public function db()
   {
-    
-    try {
-      $db = new PDO(  
-        "mysql:host=localhost;dbname=diplom", "admin", "admin"
-      );
-    } catch (PDOException $e) {
-        die('Database error: '.$e->getMessage().'<br/>');
+      try {
+          $db = new PDO (  
+        // "mysql:host=localhost;dbname=kuvshinovd_net", "kuvshinovd_net", "kuvshinovd_net" -----для ftp
+          "mysql:host=localhost;dbname=diplom", "admin", "admin"
+          );
+      } catch (PDOException $e) {
+          die('Database error: '.$e->getMessage().'<br/>');
+      }
+      return $db;
     }
-    return $db;
-  }
 }
 
-include 'router/router_cases.php';
+include 'router/RouterCases.php';

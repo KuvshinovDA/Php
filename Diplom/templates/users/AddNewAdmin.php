@@ -9,14 +9,14 @@
 <?php echo @$error?>
 <form action = "index.php" method="POST">
     <input type="hidden" name="c" value="users">
-    <input type="hidden" name="a" value="add_new_admin">
+    <input type="hidden" name="a" value="addNewAdmin">
     <label>
         <p><input type="text" placeholder="Введите новый логин" name="login"></p>
     </label>
     <label>
         <p><input type="text" placeholder="Введите новый пароль" name="password"></p>
     </label>
-    <input type="submit" name ="add_admin" value="Подтвердить создание">
+    <input type="submit" name ="addAdmin" value="Подтвердить создание">
 </form></br>
 <form method = "GET">
     <input type="hidden" name="c" value="users">

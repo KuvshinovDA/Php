@@ -16,7 +16,7 @@
     <label>
         <p><input type="text" placeholder="Введите новую категорию" name="newCategory"></p>
     </label>
-    <input type="submit" name ="add_admin" value="Подтвердить создание">
+    <input type="submit" name ="addAdmin" value="Подтвердить создание">
 </form></br>
 <form method = "GET">
     <input type="hidden" name="c" value="cases">
